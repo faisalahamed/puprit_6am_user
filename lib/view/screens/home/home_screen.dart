@@ -1,5 +1,6 @@
 import 'package:sixam_mart/controller/auth_controller.dart';
 import 'package:sixam_mart/controller/banner_controller.dart';
+import 'package:sixam_mart/controller/brand_controller.dart';
 import 'package:sixam_mart/controller/campaign_controller.dart';
 import 'package:sixam_mart/controller/category_controller.dart';
 import 'package:sixam_mart/controller/location_controller.dart';
@@ -20,6 +21,7 @@ import 'package:sixam_mart/view/base/paginated_list_view.dart';
 import 'package:sixam_mart/view/base/web_menu_bar.dart';
 import 'package:sixam_mart/view/screens/home/theme1/theme1_home_screen.dart';
 import 'package:sixam_mart/view/screens/home/web_home_screen.dart';
+import 'package:sixam_mart/view/screens/home/widget/brand_view.dart';
 import 'package:sixam_mart/view/screens/home/widget/filter_view.dart';
 import 'package:sixam_mart/view/screens/home/widget/popular_item_view.dart';
 import 'package:sixam_mart/view/screens/home/widget/item_campaign_view.dart';
@@ -41,6 +43,7 @@ class HomeScreen extends StatefulWidget {
             .isParcel) {
       Get.find<BannerController>().getBannerList(reload);
       Get.find<CategoryController>().getCategoryList(reload);
+      Get.find<BrandController>().getBrandListfist(reload);
       Get.find<StoreController>().getPopularStoreList(reload, 'all', false);
       Get.find<CampaignController>().getItemCampaignList(reload);
       Get.find<ItemController>().getPopularItemList(reload, 'all', false);
@@ -395,12 +398,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 //     isPopular: true,
                                                 //     isFeatured: false),
                                                 ItemCampaignView(),
-                                                PopularItemView(
-                                                    isPopular: true),
+                                                TrendingNowView(
+                                                    isPopular:
+                                                        true), //trending now
+                                                BrandView(),
                                                 // PopularStoreView(
                                                 //     isPopular: false,
                                                 //     isFeatured: false),
-                                                PopularItemView(
+                                                TrendingNowView(
                                                     isPopular: false),
                                                 // Padding(
                                                 //   padding: EdgeInsets.fromLTRB(

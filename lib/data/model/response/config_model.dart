@@ -223,6 +223,7 @@ class BaseUrls {
   String customerImageUrl;
   String bannerImageUrl;
   String categoryImageUrl;
+  String brandImageUrl;
   String reviewImageUrl;
   String notificationImageUrl;
   String vendorImageUrl;
@@ -241,6 +242,7 @@ class BaseUrls {
         this.customerImageUrl,
         this.bannerImageUrl,
         this.categoryImageUrl,
+        this.brandImageUrl,
         this.reviewImageUrl,
         this.notificationImageUrl,
         this.vendorImageUrl,
@@ -260,6 +262,7 @@ class BaseUrls {
     customerImageUrl = json['customer_image_url'];
     bannerImageUrl = json['banner_image_url'];
     categoryImageUrl = json['category_image_url'];
+    brandImageUrl = json['image'];
     reviewImageUrl = json['review_image_url'];
     notificationImageUrl = json['notification_image_url'];
     vendorImageUrl = json['vendor_image_url'];
@@ -280,6 +283,7 @@ class BaseUrls {
     data['customer_image_url'] = this.customerImageUrl;
     data['banner_image_url'] = this.bannerImageUrl;
     data['category_image_url'] = this.categoryImageUrl;
+    data['image:'] = this.brandImageUrl;
     data['review_image_url'] = this.reviewImageUrl;
     data['notification_image_url'] = this.notificationImageUrl;
     data['vendor_image_url'] = this.vendorImageUrl;

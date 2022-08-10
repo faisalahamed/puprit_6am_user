@@ -12,6 +12,9 @@ class AppConstants {
   static const String BANNER_URI = '/api/v1/banners';
   static const String STORE_ITEM_URI = '/api/v1/items/latest';
   static const String POPULAR_ITEM_URI = '/api/v1/items/popular';
+  // BRAND https://medibot.pulpitdma.in/api/v1/brands
+  static const String BRAND_ITEM_URI = '/api/v1/brands';
+  static const String BRAND_IMAGE_URI = 'https://medibot.pulpitdma.in/storage/app/public/brand/';
   static const String REVIEWED_ITEM_URI = '/api/v1/items/most-reviewed';
   static const String SEARCH_ITEM_URI = '/api/v1/items/details/';
   static const String SUB_CATEGORY_URI = '/api/v1/categories/childes/';

@@ -1,7 +1,9 @@
+import 'package:sixam_mart/controller/brand_controller.dart';
 import 'package:sixam_mart/controller/category_controller.dart';
 import 'package:sixam_mart/controller/splash_controller.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
+import 'package:sixam_mart/util/app_constants.dart';
 import 'package:sixam_mart/util/dimensions.dart';
 import 'package:sixam_mart/util/styles.dart';
 import 'package:sixam_mart/view/base/custom_image.dart';
@@ -11,21 +13,21 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:get/get.dart';
 
-class CategoryView extends StatelessWidget {
+class BrandView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = ScrollController();
 
-    return GetBuilder<CategoryController>(builder: (categoryController) {
-      return (categoryController.categoryList != null &&
-              categoryController.categoryList.length == 0)
+    return GetBuilder<BrandController>(builder: (brandController) {
+      return (brandController.categoryList != null &&
+              brandController.categoryList.length == 0)
           ? SizedBox()
           : Column(
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: TitleWidget(
-                    title: 'categories'.tr,
+                    title: 'brand_title'.tr,
                     // onTap: () => Get.toNamed(RouteHelper.getCategoryRoute()),
                   ),
                 ),
@@ -34,22 +36,21 @@ class CategoryView extends StatelessWidget {
                     Expanded(
                       child: Container(
                         // color: Colors.amberAccent,
-                        height: 260,
-                        child: categoryController.categoryList != null
+                        height: 220,
+                        child: brandController.categoryList != null
                             ? GridView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  crossAxisSpacing: 5.0,
+                                  crossAxisSpacing: 2.0,
                                   // mainAxisSpacing: 5.0,
                                 ),
                                 controller: _scrollController,
                                 itemCount:
-                                    categoryController.categoryList.length > 15
+                                    brandController.categoryList.length > 15
                                         ? 15
-                                        : categoryController
-                                            .categoryList.length,
+                                        : brandController.categoryList.length,
                                 padding: EdgeInsets.only(
                                     left: Dimensions.PADDING_SIZE_SMALL),
                                 // physics: BouncingScrollPhysics(),
@@ -62,9 +63,8 @@ class CategoryView extends StatelessWidget {
                                       // !
                                       onTap: () => Get.toNamed(
                                           RouteHelper.getCategoryItemRoute(
-                                        categoryController
-                                            .categoryList[index].id,
-                                        categoryController
+                                        brandController.categoryList[index].id,
+                                        brandController
                                             .categoryList[index].name,
                                       )),
                                       child: Container(
@@ -89,8 +89,9 @@ class CategoryView extends StatelessWidget {
                                                         Dimensions
                                                             .RADIUS_SMALL),
                                                 child: CustomImage(
-                                                  image:
-                                                      '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',
+                                                  image: AppConstants
+                                                          .BRAND_IMAGE_URI +
+                                                      '/${brandController.categoryList[index].image}',
                                                   // height: 50,
                                                   // width: 50,
                                                   fit: BoxFit.cover,
@@ -98,25 +99,25 @@ class CategoryView extends StatelessWidget {
                                               ),
                                             ]),
                                           ),
-                                          SizedBox(
-                                              height: Dimensions
-                                                  .PADDING_SIZE_EXTRA_SMALL),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                right: index == 0
-                                                    ? Dimensions
-                                                        .PADDING_SIZE_EXTRA_SMALL
-                                                    : 0),
-                                            child: Text(
-                                              categoryController
-                                                  .categoryList[index].name,
-                                              style: robotoMedium.copyWith(
-                                                  fontSize: 11),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
+                                          // SizedBox(
+                                          //     height: Dimensions
+                                          //         .PADDING_SIZE_EXTRA_SMALL),
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(
+                                          //       right: index == 0
+                                          //           ? Dimensions
+                                          //               .PADDING_SIZE_EXTRA_SMALL
+                                          //           : 0),
+                                          //   child: Text(
+                                          //     brandController
+                                          //         .categoryList[index].name,
+                                          //     style: robotoMedium.copyWith(
+                                          //         fontSize: 11),
+                                          //     maxLines: 2,
+                                          //     overflow: TextOverflow.ellipsis,
+                                          //     textAlign: TextAlign.center,
+                                          //   ),
+                                          // ),
                                         ]),
                                       ),
                                     ),
@@ -124,26 +125,26 @@ class CategoryView extends StatelessWidget {
                                 },
                               )
                             : CategoryShimmer(
-                                categoryController: categoryController),
+                                categoryController: brandController),
                       ),
                     ),
                     ResponsiveHelper.isMobile(context)
                         ? SizedBox()
-                        : categoryController.categoryList != null
+                        : brandController.categoryList != null
                             ? Column(
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (con) => Dialog(
-                                              child: Container(
-                                                  height: 550,
-                                                  width: 600,
-                                                  child: CategoryPopUp(
-                                                    categoryController:
-                                                        categoryController,
-                                                  ))));
+                                      // showDialog(
+                                      //     context: context,
+                                      //     builder: (con) => Dialog(
+                                      //         child: Container(
+                                      //             height: 550,
+                                      //             width: 600,
+                                      //             child: CategoryPopUp(
+                                      //               categoryController:
+                                      //                   categoryController,
+                                      //             ))));
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.only(
@@ -167,7 +168,7 @@ class CategoryView extends StatelessWidget {
                                 ],
                               )
                             : CategoryAllShimmer(
-                                categoryController: categoryController)
+                                categoryController: brandController)
                   ],
                 ),
               ],
@@ -177,7 +178,7 @@ class CategoryView extends StatelessWidget {
 }
 
 class CategoryShimmer extends StatelessWidget {
-  final CategoryController categoryController;
+  final BrandController categoryController;
   CategoryShimmer({@required this.categoryController});
 
   @override
@@ -218,7 +219,7 @@ class CategoryShimmer extends StatelessWidget {
 }
 
 class CategoryAllShimmer extends StatelessWidget {
-  final CategoryController categoryController;
+  final BrandController categoryController;
   CategoryAllShimmer({@required this.categoryController});
 
   @override

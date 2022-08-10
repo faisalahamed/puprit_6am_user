@@ -7,6 +7,10 @@ import 'package:get/get.dart';
 class ItemRepo extends GetxService {
   final ApiClient apiClient;
   ItemRepo({@required this.apiClient});
+// new
+  Future<Response> getBrandItemList(String type) async {
+    return await apiClient.getData('${AppConstants.BRAND_ITEM_URI}');
+  }
 
   Future<Response> getPopularItemList(String type) async {
     return await apiClient.getData('${AppConstants.POPULAR_ITEM_URI}?type=$type');

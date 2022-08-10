@@ -15,9 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:get/get.dart';
 
-class PopularItemView extends StatelessWidget {
+class TrendingNowView extends StatelessWidget {
   final bool isPopular;
-  PopularItemView({@required this.isPopular});
+  TrendingNowView({@required this.isPopular});
 
   @override
   Widget build(BuildContext context) {
@@ -28,230 +28,235 @@ class PopularItemView extends StatelessWidget {
 
       return (_itemList != null && _itemList.length == 0)
           ? SizedBox()
-          : Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
-                  child: TitleWidget(
-                    title: isPopular
-                        ? 'popular_items_nearby'.tr
-                        : 'best_reviewed_item'.tr,
-                    onTap: () =>
-                        Get.toNamed(RouteHelper.getPopularItemRoute(isPopular)),
+          : Container(
+              color: Colors.grey[200],
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
+                    child: TitleWidget(
+                      title: isPopular
+                          ? 'popular_items_nearby'.tr
+                          : 'best_reviewed_item'.tr,
+                      onTap: () => Get.toNamed(
+                          RouteHelper.getPopularItemRoute(isPopular)),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 190,
-                  child: _itemList != null
-                      ? ListView.builder(
-                          controller: ScrollController(),
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.only(
-                              left: Dimensions.PADDING_SIZE_SMALL),
-                          itemCount:
-                              _itemList.length > 10 ? 10 : _itemList.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  2, 2, Dimensions.PADDING_SIZE_SMALL, 2),
-                              child: InkWell(
-                                onTap: () {
-                                  Get.find<ItemController>().navigateToItemPage(
-                                      _itemList[index], context);
-                                },
-                                child: Container(
-                                  height: 190,
-                                  width: 150,
-                                  padding: EdgeInsets.all(
-                                      Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.RADIUS_SMALL),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey[
-                                            Get.find<ThemeController>()
-                                                    .darkTheme
-                                                ? 800
-                                                : 300],
-                                        blurRadius: 5,
-                                        spreadRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Stack(children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.RADIUS_SMALL),
-                                            child: CustomImage(
-                                              image:
-                                                  '${Get.find<SplashController>().configModel.baseUrls.itemImageUrl}'
-                                                  '/${_itemList[index].image}',
-                                              height: 80,
-                                              width: 80,
-                                              fit: BoxFit.cover,
+                  SizedBox(
+                    height: 190,
+                    child: _itemList != null
+                        ? ListView.builder(
+                            controller: ScrollController(),
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.only(
+                                left: Dimensions.PADDING_SIZE_SMALL),
+                            itemCount:
+                                _itemList.length > 10 ? 10 : _itemList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    2, 2, Dimensions.PADDING_SIZE_SMALL, 2),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.find<ItemController>()
+                                        .navigateToItemPage(
+                                            _itemList[index], context);
+                                  },
+                                  child: Container(
+                                    height: 190,
+                                    width: 150,
+                                    padding: EdgeInsets.all(
+                                        Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).cardColor,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.RADIUS_SMALL),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey[
+                                              Get.find<ThemeController>()
+                                                      .darkTheme
+                                                  ? 800
+                                                  : 300],
+                                          blurRadius: 5,
+                                          spreadRadius: 1,
+                                        )
+                                      ],
+                                    ),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Stack(children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.RADIUS_SMALL),
+                                              child: CustomImage(
+                                                image:
+                                                    '${Get.find<SplashController>().configModel.baseUrls.itemImageUrl}'
+                                                    '/${_itemList[index].image}',
+                                                height: 80,
+                                                width: 80,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            DiscountTag(
+                                              discount:
+                                                  itemController.getDiscount(
+                                                      _itemList[index]),
+                                              discountType: itemController
+                                                  .getDiscountType(
+                                                      _itemList[index]),
+                                            ),
+                                            itemController.isAvailable(
+                                                    _itemList[index])
+                                                ? SizedBox()
+                                                : NotAvailableWidget(),
+                                          ]),
+                                          Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: Dimensions
+                                                      .PADDING_SIZE_EXTRA_SMALL),
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      _itemList[index].name,
+                                                      style: robotoMedium.copyWith(
+                                                          fontSize: Dimensions
+                                                              .fontSizeSmall),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    SizedBox(
+                                                        height: Dimensions
+                                                            .PADDING_SIZE_EXTRA_SMALL),
+                                                    Text(
+                                                      _itemList[index]
+                                                          .storeName,
+                                                      style: robotoMedium.copyWith(
+                                                          fontSize: Dimensions
+                                                              .fontSizeExtraSmall,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .disabledColor),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    // RatingBar(
+                                                    //   rating: _itemList[index]
+                                                    //       .avgRating,
+                                                    //   size: 12,
+                                                    //   ratingCount:
+                                                    //       _itemList[index]
+                                                    //           .ratingCount,
+                                                    // ),
+                                                    Row(children: [
+                                                      Expanded(
+                                                        child: Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text(
+                                                                PriceConverter
+                                                                    .convertPrice(
+                                                                  itemController
+                                                                      .getStartingPrice(
+                                                                          _itemList[
+                                                                              index]),
+                                                                  discount: _itemList[
+                                                                          index]
+                                                                      .discount,
+                                                                  discountType:
+                                                                      _itemList[
+                                                                              index]
+                                                                          .discountType,
+                                                                ),
+                                                                style: robotoBold
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            Dimensions.fontSizeSmall),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: _itemList[index]
+                                                                              .discount >
+                                                                          0
+                                                                      ? Dimensions
+                                                                          .PADDING_SIZE_EXTRA_SMALL
+                                                                      : 0),
+                                                              _itemList[index]
+                                                                          .discount >
+                                                                      0
+                                                                  ? Flexible(
+                                                                      child:
+                                                                          Text(
+                                                                      PriceConverter.convertPrice(
+                                                                          itemController
+                                                                              .getStartingPrice(_itemList[index])),
+                                                                      style: robotoMedium
+                                                                          .copyWith(
+                                                                        fontSize:
+                                                                            Dimensions.fontSizeExtraSmall,
+                                                                        color: Theme.of(context)
+                                                                            .disabledColor,
+                                                                        decoration:
+                                                                            TextDecoration.lineThrough,
+                                                                      ),
+                                                                    ))
+                                                                  : SizedBox(),
+                                                            ]),
+                                                      ),
+                                                      // Icon(Icons.add, size: 20),
+                                                    ]),
+                                                  ]),
                                             ),
                                           ),
-                                          DiscountTag(
-                                            discount: itemController
-                                                .getDiscount(_itemList[index]),
-                                            discountType:
-                                                itemController.getDiscountType(
-                                                    _itemList[index]),
-                                          ),
-                                          itemController
-                                                  .isAvailable(_itemList[index])
-                                              ? SizedBox()
-                                              : NotAvailableWidget(),
+                                          // Add to cart================
+                                          // Container(
+                                          //   width: double.infinity,
+                                          //   decoration: BoxDecoration(
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(10),
+                                          //       border: Border.all(width: 1.0)),
+                                          //   height: 25,
+                                          //   child: TextButton(
+                                          //     style: ButtonStyle(
+                                          //       // backgroundColor:
+                                          //       //     MaterialStateProperty.all<
+                                          //       //         Color>(Colors.black),
+                                          //       padding: MaterialStateProperty
+                                          //           .all<EdgeInsets>(
+                                          //               EdgeInsets.all(0)),
+                                          //     ),
+                                          //     child: const Text(
+                                          //       'Add to Cart',
+                                          //       style: TextStyle(fontSize: 13),
+                                          //     ),
+                                          //     onPressed: () {},
+                                          //   ),
+                                          // )
                                         ]),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: Dimensions
-                                                    .PADDING_SIZE_EXTRA_SMALL),
-                                            child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    _itemList[index].name,
-                                                    style:
-                                                        robotoMedium.copyWith(
-                                                            fontSize: Dimensions
-                                                                .fontSizeSmall),
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  SizedBox(
-                                                      height: Dimensions
-                                                          .PADDING_SIZE_EXTRA_SMALL),
-                                                  Text(
-                                                    _itemList[index].storeName,
-                                                    style: robotoMedium.copyWith(
-                                                        fontSize: Dimensions
-                                                            .fontSizeExtraSmall,
-                                                        color: Theme.of(context)
-                                                            .disabledColor),
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  // RatingBar(
-                                                  //   rating: _itemList[index]
-                                                  //       .avgRating,
-                                                  //   size: 12,
-                                                  //   ratingCount:
-                                                  //       _itemList[index]
-                                                  //           .ratingCount,
-                                                  // ),
-                                                  Row(children: [
-                                                    Expanded(
-                                                      child: Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text(
-                                                              PriceConverter
-                                                                  .convertPrice(
-                                                                itemController
-                                                                    .getStartingPrice(
-                                                                        _itemList[
-                                                                            index]),
-                                                                discount: _itemList[
-                                                                        index]
-                                                                    .discount,
-                                                                discountType:
-                                                                    _itemList[
-                                                                            index]
-                                                                        .discountType,
-                                                              ),
-                                                              style: robotoBold
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeSmall),
-                                                            ),
-                                                            SizedBox(
-                                                                width: _itemList[index]
-                                                                            .discount >
-                                                                        0
-                                                                    ? Dimensions
-                                                                        .PADDING_SIZE_EXTRA_SMALL
-                                                                    : 0),
-                                                            _itemList[index]
-                                                                        .discount >
-                                                                    0
-                                                                ? Flexible(
-                                                                    child: Text(
-                                                                    PriceConverter.convertPrice(
-                                                                        itemController
-                                                                            .getStartingPrice(_itemList[index])),
-                                                                    style: robotoMedium
-                                                                        .copyWith(
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeExtraSmall,
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .disabledColor,
-                                                                      decoration:
-                                                                          TextDecoration
-                                                                              .lineThrough,
-                                                                    ),
-                                                                  ))
-                                                                : SizedBox(),
-                                                          ]),
-                                                    ),
-                                                    // Icon(Icons.add, size: 20),
-                                                  ]),
-                                                ]),
-                                          ),
-                                        ),
-                                        // Add to cart================
-                                        // Container(
-                                        //   width: double.infinity,
-                                        //   decoration: BoxDecoration(
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(10),
-                                        //       border: Border.all(width: 1.0)),
-                                        //   height: 25,
-                                        //   child: TextButton(
-                                        //     style: ButtonStyle(
-                                        //       // backgroundColor:
-                                        //       //     MaterialStateProperty.all<
-                                        //       //         Color>(Colors.black),
-                                        //       padding: MaterialStateProperty
-                                        //           .all<EdgeInsets>(
-                                        //               EdgeInsets.all(0)),
-                                        //     ),
-                                        //     child: const Text(
-                                        //       'Add to Cart',
-                                        //       style: TextStyle(fontSize: 13),
-                                        //     ),
-                                        //     onPressed: () {},
-                                        //   ),
-                                        // )
-                                      ]),
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        )
-                      : PopularItemShimmer(enabled: _itemList == null),
-                ),
-              ],
+                              );
+                            },
+                          )
+                        : PopularItemShimmer(enabled: _itemList == null),
+                  ),
+                ],
+              ),
             );
     });
   }
