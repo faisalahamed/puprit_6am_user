@@ -214,34 +214,35 @@ class PopularItemView extends StatelessWidget {
                                                                 : SizedBox(),
                                                           ]),
                                                     ),
-                                                    Icon(Icons.add, size: 20),
+                                                    // Icon(Icons.add, size: 20),
                                                   ]),
                                                 ]),
                                           ),
                                         ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(width: 1.0)),
-                                          height: 25,
-                                          child: TextButton(
-                                            style: ButtonStyle(
-                                              // backgroundColor:
-                                              //     MaterialStateProperty.all<
-                                              //         Color>(Colors.black),
-                                              padding: MaterialStateProperty
-                                                  .all<EdgeInsets>(
-                                                      EdgeInsets.all(0)),
-                                            ),
-                                            child: const Text(
-                                              'Add to Cart',
-                                              style: TextStyle(fontSize: 13),
-                                            ),
-                                            onPressed: () {},
-                                          ),
-                                        )
+                                        // Add to cart================
+                                        // Container(
+                                        //   width: double.infinity,
+                                        //   decoration: BoxDecoration(
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(10),
+                                        //       border: Border.all(width: 1.0)),
+                                        //   height: 25,
+                                        //   child: TextButton(
+                                        //     style: ButtonStyle(
+                                        //       // backgroundColor:
+                                        //       //     MaterialStateProperty.all<
+                                        //       //         Color>(Colors.black),
+                                        //       padding: MaterialStateProperty
+                                        //           .all<EdgeInsets>(
+                                        //               EdgeInsets.all(0)),
+                                        //     ),
+                                        //     child: const Text(
+                                        //       'Add to Cart',
+                                        //       style: TextStyle(fontSize: 13),
+                                        //     ),
+                                        //     onPressed: () {},
+                                        //   ),
+                                        // )
                                       ]),
                                 ),
                               ),
