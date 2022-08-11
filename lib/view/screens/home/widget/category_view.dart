@@ -1,5 +1,6 @@
 import 'package:sixam_mart/controller/category_controller.dart';
 import 'package:sixam_mart/controller/splash_controller.dart';
+import 'package:sixam_mart/controller/theme_controller.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
 import 'package:sixam_mart/util/dimensions.dart';
@@ -68,26 +69,45 @@ class CategoryView extends StatelessWidget {
                                             .categoryList[index].name,
                                       )),
                                       child: Container(
-                                        // color: Colors.blueAccent,
                                         width: 120,
                                         child: Column(children: [
                                           Container(
+                                            //     padding: EdgeInsets.all(
+                                            // Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    Theme.of(context).cardColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors
+                                                          .grey[Get.find<
+                                                                  ThemeController>()
+                                                              .darkTheme
+                                                          ? 800
+                                                          : 300],
+                                                      blurRadius: 8,
+                                                      spreadRadius: 2,
+                                                      offset: Offset(-2, -2))
+                                                ]),
+                                            // color: Colors.blueAccent,
                                             height: 100,
                                             // width: 150,
-                                            margin: EdgeInsets.only(
-                                              left: index == 0
-                                                  ? 0
-                                                  : Dimensions
-                                                      .PADDING_SIZE_EXTRA_SMALL,
-                                              right: Dimensions
-                                                  .PADDING_SIZE_EXTRA_SMALL,
-                                            ),
+                                            // margin: EdgeInsets.only(
+                                            //   left: index == 0
+                                            //       ? 0
+                                            //       : Dimensions
+                                            //           .PADDING_SIZE_EXTRA_SMALL,
+                                            //   right: Dimensions
+                                            //       .PADDING_SIZE_EXTRA_SMALL,
+                                            // ),
                                             child: Stack(children: [
                                               ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        Dimensions
-                                                            .RADIUS_SMALL),
+                                                // borderRadius:
+                                                //     BorderRadius.circular(
+                                                //         Dimensions
+                                                //             .RADIUS_SMALL),
                                                 child: CustomImage(
                                                   image:
                                                       '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',

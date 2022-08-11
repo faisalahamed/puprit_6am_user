@@ -9,6 +9,7 @@ import 'package:sixam_mart/controller/item_controller.dart';
 import 'package:sixam_mart/controller/parcel_controller.dart';
 import 'package:sixam_mart/controller/store_controller.dart';
 import 'package:sixam_mart/controller/splash_controller.dart';
+import 'package:sixam_mart/controller/theme_controller.dart';
 import 'package:sixam_mart/controller/user_controller.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/helper/route_helper.dart';
@@ -103,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
       return Scaffold(
         appBar: ResponsiveHelper.isDesktop(context) ? WebMenuBar() : null,
         endDrawer: MenuDrawer(),
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Get.find<ThemeController>().darkTheme
+            ? Colors.black87 
+            :Colors.white,
         //  ResponsiveHelper.isDesktop(context)
         //     ? Theme.of(context).cardColor
         //     : splashController.module == null
@@ -111,461 +114,456 @@ class _HomeScreenState extends State<HomeScreen> {
         //         : null,
         body: _isParcel
             ? ParcelCategoryScreen()
-            : SafeArea(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    if (Get.find<SplashController>().module != null) {
-                      await Get.find<BannerController>().getBannerList(true);
-                      await Get.find<CategoryController>()
-                          .getCategoryList(true);
-                      await Get.find<StoreController>()
-                          .getPopularStoreList(true, 'all', false);
-                      await Get.find<CampaignController>()
-                          .getItemCampaignList(true);
-                      await Get.find<ItemController>()
-                          .getPopularItemList(true, 'all', false);
-                      await Get.find<StoreController>()
-                          .getLatestStoreList(true, 'all', false);
-                      await Get.find<ItemController>()
-                          .getReviewedItemList(true, 'all', false);
-                      await Get.find<StoreController>().getStoreList(1, true);
-                      if (Get.find<AuthController>().isLoggedIn()) {
-                        await Get.find<UserController>().getUserInfo();
-                        await Get.find<NotificationController>()
-                            .getNotificationList(true);
-                      }
-                    } else {
-                      await Get.find<BannerController>().getFeaturedBanner();
-                      await Get.find<SplashController>().getModules();
-                      if (Get.find<AuthController>().isLoggedIn()) {
-                        await Get.find<LocationController>().getAddressList();
-                      }
-                      await Get.find<StoreController>().getFeaturedStoreList();
+            : RefreshIndicator(
+                onRefresh: () async {
+                  if (Get.find<SplashController>().module != null) {
+                    await Get.find<BannerController>().getBannerList(true);
+                    await Get.find<CategoryController>().getCategoryList(true);
+                    await Get.find<StoreController>()
+                        .getPopularStoreList(true, 'all', false);
+                    await Get.find<CampaignController>()
+                        .getItemCampaignList(true);
+                    await Get.find<ItemController>()
+                        .getPopularItemList(true, 'all', false);
+                    await Get.find<StoreController>()
+                        .getLatestStoreList(true, 'all', false);
+                    await Get.find<ItemController>()
+                        .getReviewedItemList(true, 'all', false);
+                    await Get.find<StoreController>().getStoreList(1, true);
+                    if (Get.find<AuthController>().isLoggedIn()) {
+                      await Get.find<UserController>().getUserInfo();
+                      await Get.find<NotificationController>()
+                          .getNotificationList(true);
                     }
-                  },
-                  child: ResponsiveHelper.isDesktop(context)
-                      ? WebHomeScreen(
-                          scrollController: _scrollController,
-                        )
-                      : (Get.find<SplashController>().module != null &&
-                              Get.find<SplashController>().module.themeId == 2)
-                          ? Theme1HomeScreen(
-                              scrollController: _scrollController,
-                              splashController: splashController,
-                              showMobileModule: _showMobileModule,
-                            )
-                          : CustomScrollView(
-                              controller: _scrollController,
-                              physics: AlwaysScrollableScrollPhysics(),
-                              slivers: [
-                                // App Bar
-                                SliverAppBar(
-                                  titleSpacing: 0.0,
-                                  floating: true,
-                                  elevation: 0,
-                                  automaticallyImplyLeading: false,
-                                  // backgroundColor: Colors.grey[200],
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  // ResponsiveHelper.isDesktop(context)
-                                  //     ? Colors.transparent
-                                  //     : Theme.of(context).backgroundColor,
-                                  leading: Container(
-                                      padding: EdgeInsets.only(left: 5.0),
-                                      child: Row(
+                  } else {
+                    await Get.find<BannerController>().getFeaturedBanner();
+                    await Get.find<SplashController>().getModules();
+                    if (Get.find<AuthController>().isLoggedIn()) {
+                      await Get.find<LocationController>().getAddressList();
+                    }
+                    await Get.find<StoreController>().getFeaturedStoreList();
+                  }
+                },
+                child: ResponsiveHelper.isDesktop(context)
+                    ? WebHomeScreen(
+                        scrollController: _scrollController,
+                      )
+                    : (Get.find<SplashController>().module != null &&
+                            Get.find<SplashController>().module.themeId == 2)
+                        ? Theme1HomeScreen(
+                            scrollController: _scrollController,
+                            splashController: splashController,
+                            showMobileModule: _showMobileModule,
+                          )
+                        : CustomScrollView(
+                            controller: _scrollController,
+                            physics: AlwaysScrollableScrollPhysics(),
+                            slivers: [
+                              // App Bar
+                              SliverAppBar(
+                                titleSpacing: 0.0,
+                                floating: true,
+                                elevation: 0,
+                                automaticallyImplyLeading: false,
+                                // backgroundColor: Colors.grey[200],
+                                backgroundColor: Theme.of(context).primaryColor,
+                                // ResponsiveHelper.isDesktop(context)
+                                //     ? Colors.transparent
+                                //     : Theme.of(context).backgroundColor,
+                                leading: Container(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          // ${Get.find<SplashController>().configModel.baseUrls.customerImageUrl}
+                                          child: Icon(Icons.person,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          backgroundColor: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              .color,
+                                        ),
+                                        SizedBox(width: 5),
+                                      ],
+                                    )),
+                                title: Column(
+                                  children: [
+                                    Container(
+                                      width: 230,
+                                      child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          CircleAvatar(
-                                            child: Icon(Icons.person,
-                                                color: Theme.of(context)
-                                                    .primaryColor),
-                                            backgroundColor: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1
-                                                .color,
-                                          ),
-                                          SizedBox(width: 5),
+                                          GetBuilder<LocationController>(
+                                              builder: (locationController) {
+                                            return Text(
+                                              locationController
+                                                  .getUserAddress()
+                                                  .address,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1
+                                                      .color,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                            );
+                                          }),
+                                          // Text(
+                                          //   'Birla Colony',
+                                          //   style: TextStyle(
+                                          //       fontSize: 12,
+                                          //       color: Colors.white),
+                                          // )
                                         ],
-                                      )),
-                                  title: Column(
-                                    children: [
-                                      Container(
-                                        width: 230,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            GetBuilder<LocationController>(
-                                                builder: (locationController) {
-                                              return Text(
-                                                locationController
-                                                    .getUserAddress()
-                                                    .address,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1
-                                                        .color,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              );
-                                            }),
-                                            // Text(
-                                            //   'Birla Colony',
-                                            //   style: TextStyle(
-                                            //       fontSize: 12,
-                                            //       color: Colors.white),
-                                            // )
-                                          ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+
+                                actions: [
+                                  // (splashController.module != null &&
+                                  //         splashController
+                                  //                 .configModel.module ==
+                                  //             null)
+                                  //     ? InkWell(
+                                  //         onTap: () => splashController
+                                  //             .removeModule(),
+                                  //         child: Image.asset(
+                                  //             Images.module_icon,
+                                  //             height: 22,
+                                  //             width: 22,
+                                  //             color: Theme.of(context)
+                                  //                 .textTheme
+                                  //                 .bodyText1
+                                  //                 .color),
+                                  //       )
+                                  //     : SizedBox(),
+                                  // SizedBox(
+                                  //     width: (splashController.module !=
+                                  //                 null &&
+                                  //             splashController
+                                  //                     .configModel.module ==
+                                  //                 null)
+                                  //         ? Dimensions
+                                  //             .PADDING_SIZE_EXTRA_SMALL
+                                  //         : 0),
+                                  // Expanded(
+                                  //     child: InkWell(
+                                  //   onTap: () => Get.toNamed(
+                                  //       RouteHelper.getAccessLocationRoute(
+                                  //           'home')),
+                                  //   child: Padding(
+                                  //     padding: EdgeInsets.symmetric(
+                                  //       vertical:
+                                  //           Dimensions.PADDING_SIZE_SMALL,
+                                  //       horizontal: ResponsiveHelper
+                                  //               .isDesktop(context)
+                                  //           ? Dimensions.PADDING_SIZE_SMALL
+                                  //           : 0,
+                                  //     ),
+                                  //     child: GetBuilder<LocationController>(
+                                  //         builder: (locationController) {
+                                  //       return Row(
+                                  //         crossAxisAlignment:
+                                  //             CrossAxisAlignment.center,
+                                  //         mainAxisAlignment:
+                                  //             MainAxisAlignment.start,
+                                  //         children: [
+                                  //           Icon(
+                                  //             locationController
+                                  //                         .getUserAddress()
+                                  //                         .addressType ==
+                                  //                     'home'
+                                  //                 ? Icons.home_filled
+                                  //                 : locationController
+                                  //                             .getUserAddress()
+                                  //                             .addressType ==
+                                  //                         'office'
+                                  //                     ? Icons.work
+                                  //                     : Icons.location_on,
+                                  //             size: 20,
+                                  //             color: Theme.of(context)
+                                  //                 .textTheme
+                                  //                 .bodyText1
+                                  //                 .color,
+                                  //           ),
+                                  //           SizedBox(width: 10),
+                                  //           Flexible(
+                                  //             child: Text(
+                                  //               locationController
+                                  //                   .getUserAddress()
+                                  //                   .address,
+                                  //               style:
+                                  //                   robotoRegular.copyWith(
+                                  //                 color: Theme.of(context)
+                                  //                     .textTheme
+                                  //                     .bodyText1
+                                  //                     .color,
+                                  //                 fontSize: Dimensions
+                                  //                     .fontSizeSmall,
+                                  //               ),
+                                  //               maxLines: 1,
+                                  //               overflow:
+                                  //                   TextOverflow.ellipsis,
+                                  //             ),
+                                  //           ),
+                                  //           Icon(Icons.arrow_drop_down,
+                                  //               color: Theme.of(context)
+                                  //                   .textTheme
+                                  //                   .bodyText1
+                                  //                   .color),
+                                  //         ],
+                                  //       );
+                                  //     }),
+                                  //   ),
+                                  // )),
+
+                                  // Search and Notification
+                                  Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 5),
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                          child: InkWell(
+                                            child: Icon(Icons.search,
+                                                size: 25,
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1
+                                                    .color),
+                                            onTap: () => Get.toNamed(
+                                                RouteHelper.getSearchRoute()),
+                                          ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-
-                                  actions: [
-                                    // (splashController.module != null &&
-                                    //         splashController
-                                    //                 .configModel.module ==
-                                    //             null)
-                                    //     ? InkWell(
-                                    //         onTap: () => splashController
-                                    //             .removeModule(),
-                                    //         child: Image.asset(
-                                    //             Images.module_icon,
-                                    //             height: 22,
-                                    //             width: 22,
-                                    //             color: Theme.of(context)
-                                    //                 .textTheme
-                                    //                 .bodyText1
-                                    //                 .color),
-                                    //       )
-                                    //     : SizedBox(),
-                                    // SizedBox(
-                                    //     width: (splashController.module !=
-                                    //                 null &&
-                                    //             splashController
-                                    //                     .configModel.module ==
-                                    //                 null)
-                                    //         ? Dimensions
-                                    //             .PADDING_SIZE_EXTRA_SMALL
-                                    //         : 0),
-                                    // Expanded(
-                                    //     child: InkWell(
-                                    //   onTap: () => Get.toNamed(
-                                    //       RouteHelper.getAccessLocationRoute(
-                                    //           'home')),
-                                    //   child: Padding(
-                                    //     padding: EdgeInsets.symmetric(
-                                    //       vertical:
-                                    //           Dimensions.PADDING_SIZE_SMALL,
-                                    //       horizontal: ResponsiveHelper
-                                    //               .isDesktop(context)
-                                    //           ? Dimensions.PADDING_SIZE_SMALL
-                                    //           : 0,
-                                    //     ),
-                                    //     child: GetBuilder<LocationController>(
-                                    //         builder: (locationController) {
-                                    //       return Row(
-                                    //         crossAxisAlignment:
-                                    //             CrossAxisAlignment.center,
-                                    //         mainAxisAlignment:
-                                    //             MainAxisAlignment.start,
-                                    //         children: [
-                                    //           Icon(
-                                    //             locationController
-                                    //                         .getUserAddress()
-                                    //                         .addressType ==
-                                    //                     'home'
-                                    //                 ? Icons.home_filled
-                                    //                 : locationController
-                                    //                             .getUserAddress()
-                                    //                             .addressType ==
-                                    //                         'office'
-                                    //                     ? Icons.work
-                                    //                     : Icons.location_on,
-                                    //             size: 20,
-                                    //             color: Theme.of(context)
-                                    //                 .textTheme
-                                    //                 .bodyText1
-                                    //                 .color,
-                                    //           ),
-                                    //           SizedBox(width: 10),
-                                    //           Flexible(
-                                    //             child: Text(
-                                    //               locationController
-                                    //                   .getUserAddress()
-                                    //                   .address,
-                                    //               style:
-                                    //                   robotoRegular.copyWith(
-                                    //                 color: Theme.of(context)
-                                    //                     .textTheme
-                                    //                     .bodyText1
-                                    //                     .color,
-                                    //                 fontSize: Dimensions
-                                    //                     .fontSizeSmall,
-                                    //               ),
-                                    //               maxLines: 1,
-                                    //               overflow:
-                                    //                   TextOverflow.ellipsis,
-                                    //             ),
-                                    //           ),
-                                    //           Icon(Icons.arrow_drop_down,
-                                    //               color: Theme.of(context)
-                                    //                   .textTheme
-                                    //                   .bodyText1
-                                    //                   .color),
-                                    //         ],
-                                    //       );
-                                    //     }),
-                                    //   ),
-                                    // )),
-
-                                    // Search and Notification
-                                    Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      child: Row(
-                                        children: [
-                                          InkWell(
-                                            child: InkWell(
-                                              child: Icon(Icons.search,
+                                        SizedBox(width: 5),
+                                        InkWell(
+                                          child: GetBuilder<
+                                                  NotificationController>(
+                                              builder:
+                                                  (notificationController) {
+                                            return Stack(children: [
+                                              Icon(Icons.notifications,
                                                   size: 25,
                                                   color: Theme.of(context)
                                                       .textTheme
                                                       .bodyText1
                                                       .color),
-                                              onTap: () => Get.toNamed(
-                                                  RouteHelper.getSearchRoute()),
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          InkWell(
-                                            child: GetBuilder<
-                                                    NotificationController>(
-                                                builder:
-                                                    (notificationController) {
-                                              return Stack(children: [
-                                                Icon(Icons.notifications,
-                                                    size: 25,
-                                                    color: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1
-                                                        .color),
-                                                notificationController
-                                                        .hasNotification
-                                                    ? Positioned(
-                                                        top: 0,
-                                                        right: 0,
-                                                        child: Container(
-                                                          height: 10,
-                                                          width: 10,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border: Border.all(
-                                                                width: 1,
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .cardColor),
-                                                          ),
-                                                        ))
-                                                    : SizedBox(),
-                                              ]);
-                                            }),
-                                            onTap: () => Get.toNamed(RouteHelper
-                                                .getNotificationRoute()),
-                                          ),
-                                        ],
-                                      ),
+                                              notificationController
+                                                      .hasNotification
+                                                  ? Positioned(
+                                                      top: 0,
+                                                      right: 0,
+                                                      child: Container(
+                                                        height: 10,
+                                                        width: 10,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                              width: 1,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .cardColor),
+                                                        ),
+                                                      ))
+                                                  : SizedBox(),
+                                            ]);
+                                          }),
+                                          onTap: () => Get.toNamed(RouteHelper
+                                              .getNotificationRoute()),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
 
-                                // // Search Button
-                                // !_showMobileModule
-                                //     ? SliverPersistentHeader(
-                                //         pinned: true,
-                                //         delegate: SliverDelegate(
-                                //             child: Center(
-                                //                 child: Container(
-                                //           height: 50,
-                                //           width: Dimensions.WEB_MAX_WIDTH,
-                                //           color:
-                                //               // TODO: cahange color
-                                //               Theme.of(context).backgroundColor,
-                                //           padding: EdgeInsets.symmetric(
-                                //               horizontal: Dimensions
-                                //                   .PADDING_SIZE_SMALL),
-                                //           child: InkWell(
-                                //             onTap: () => Get.toNamed(
-                                //                 RouteHelper.getSearchRoute()),
-                                //             child: Container(
-                                //               padding: EdgeInsets.symmetric(
-                                //                   horizontal: Dimensions
-                                //                       .PADDING_SIZE_SMALL),
-                                //               decoration: BoxDecoration(
-                                //                 color:
-                                //                     Theme.of(context).cardColor,
-                                //                 borderRadius:
-                                //                     BorderRadius.circular(
-                                //                         Dimensions
-                                //                             .RADIUS_SMALL),
-                                //                 boxShadow: [
-                                //                   BoxShadow(
-                                //                       color: Colors.grey[
-                                //                           Get.isDarkMode
-                                //                               ? 800
-                                //                               : 200],
-                                //                       spreadRadius: 1,
-                                //                       blurRadius: 5)
-                                //                 ],
-                                //               ),
-                                //               child: Row(children: [
-                                //                 Icon(
-                                //                   Icons.search,
-                                //                   size: 25,
-                                //                   color: Theme.of(context)
-                                //                       .primaryColor,
-                                //                 ),
-                                //                 SizedBox(
-                                //                     width: Dimensions
-                                //                         .PADDING_SIZE_EXTRA_SMALL),
-                                //                 Expanded(
-                                //                     child: Text(
-                                //                   Get.find<SplashController>()
-                                //                           .configModel
-                                //                           .moduleConfig
-                                //                           .module
-                                //                           .showRestaurantText
-                                //                       ? 'search_food_or_restaurant'
-                                //                           .tr
-                                //                       : 'search_item_or_store'
-                                //                           .tr,
-                                //                   style: robotoRegular.copyWith(
-                                //                     fontSize: Dimensions
-                                //                         .fontSizeSmall,
-                                //                     color: Theme.of(context)
-                                //                         .hintColor,
-                                //                   ),
-                                //                 )),
-                                //               ]),
-                                //             ),
-                                //           ),
-                                //         ))),
-                                //       )
-                                //     : SliverToBoxAdapter(),
+                              // // Search Button
+                              // !_showMobileModule
+                              //     ? SliverPersistentHeader(
+                              //         pinned: true,
+                              //         delegate: SliverDelegate(
+                              //             child: Center(
+                              //                 child: Container(
+                              //           height: 50,
+                              //           width: Dimensions.WEB_MAX_WIDTH,
+                              //           color:
+                              //               // TODO: cahange color
+                              //               Theme.of(context).backgroundColor,
+                              //           padding: EdgeInsets.symmetric(
+                              //               horizontal: Dimensions
+                              //                   .PADDING_SIZE_SMALL),
+                              //           child: InkWell(
+                              //             onTap: () => Get.toNamed(
+                              //                 RouteHelper.getSearchRoute()),
+                              //             child: Container(
+                              //               padding: EdgeInsets.symmetric(
+                              //                   horizontal: Dimensions
+                              //                       .PADDING_SIZE_SMALL),
+                              //               decoration: BoxDecoration(
+                              //                 color:
+                              //                     Theme.of(context).cardColor,
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(
+                              //                         Dimensions
+                              //                             .RADIUS_SMALL),
+                              //                 boxShadow: [
+                              //                   BoxShadow(
+                              //                       color: Colors.grey[
+                              //                           Get.isDarkMode
+                              //                               ? 800
+                              //                               : 200],
+                              //                       spreadRadius: 1,
+                              //                       blurRadius: 5)
+                              //                 ],
+                              //               ),
+                              //               child: Row(children: [
+                              //                 Icon(
+                              //                   Icons.search,
+                              //                   size: 25,
+                              //                   color: Theme.of(context)
+                              //                       .primaryColor,
+                              //                 ),
+                              //                 SizedBox(
+                              //                     width: Dimensions
+                              //                         .PADDING_SIZE_EXTRA_SMALL),
+                              //                 Expanded(
+                              //                     child: Text(
+                              //                   Get.find<SplashController>()
+                              //                           .configModel
+                              //                           .moduleConfig
+                              //                           .module
+                              //                           .showRestaurantText
+                              //                       ? 'search_food_or_restaurant'
+                              //                           .tr
+                              //                       : 'search_item_or_store'
+                              //                           .tr,
+                              //                   style: robotoRegular.copyWith(
+                              //                     fontSize: Dimensions
+                              //                         .fontSizeSmall,
+                              //                     color: Theme.of(context)
+                              //                         .hintColor,
+                              //                   ),
+                              //                 )),
+                              //               ]),
+                              //             ),
+                              //           ),
+                              //         ))),
+                              //       )
+                              //     : SliverToBoxAdapter(),
 
-                                SliverToBoxAdapter(
-                                  child: Center(
-                                      child: SizedBox(
-                                    width: Dimensions.WEB_MAX_WIDTH,
-                                    child: !_showMobileModule
-                                        ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                                BannerView(isFeatured: false),
-                                                CategoryView(),
-                                                // PopularStoreView(
-                                                //     isPopular: true,
-                                                //     isFeatured: false),
-                                                ItemCampaignView(),
-                                                TrendingNowView(
-                                                    isPopular:
-                                                        true), //trending now
-                                                BrandView(),
-                                                // PopularStoreView(
-                                                //     isPopular: false,
-                                                //     isFeatured: false),
-                                                TrendingNowView(
-                                                    isPopular: false),
-                                                // Padding(
-                                                //   padding: EdgeInsets.fromLTRB(
-                                                //       10, 15, 0, 5),
-                                                //   child: Row(children: [
-                                                //     Expanded(
-                                                //         child: Text(
-                                                //       Get.find<SplashController>()
-                                                //               .configModel
-                                                //               .moduleConfig
-                                                //               .module
-                                                //               .showRestaurantText
-                                                //           ? 'all_restaurants'.tr
-                                                //           : 'all_stores'.tr,
-                                                //       style: robotoMedium.copyWith(
-                                                //           fontSize: Dimensions
-                                                //               .fontSizeLarge),
-                                                //     )),
-                                                //     FilterView(),
-                                                //   ]),
-                                                // ),
-                                                // GetBuilder<StoreController>(
-                                                //     builder: (storeController) {
-                                                //   return PaginatedListView(
-                                                //     scrollController:
-                                                //         _scrollController,
-                                                //     totalSize: storeController
-                                                //                 .storeModel !=
-                                                //             null
-                                                //         ? storeController
-                                                //             .storeModel
-                                                //             .totalSize
-                                                //         : null,
-                                                //     offset: storeController
-                                                //                 .storeModel !=
-                                                //             null
-                                                //         ? storeController
-                                                //             .storeModel.offset
-                                                //         : null,
-                                                //     onPaginate: (int
-                                                //             offset) async =>
-                                                //         await storeController
-                                                //             .getStoreList(
-                                                //                 offset, false),
-                                                //     itemView: ItemsView(
-                                                //       isStore: true,
-                                                //       items: null,
-                                                //       stores: storeController
-                                                //                   .storeModel !=
-                                                //               null
-                                                //           ? storeController
-                                                //               .storeModel.stores
-                                                //           : null,
-                                                //       padding:
-                                                //           EdgeInsets.symmetric(
-                                                //         horizontal: ResponsiveHelper
-                                                //                 .isDesktop(
-                                                //                     context)
-                                                //             ? Dimensions
-                                                //                 .PADDING_SIZE_EXTRA_SMALL
-                                                //             : Dimensions
-                                                //                 .PADDING_SIZE_SMALL,
-                                                //         vertical: ResponsiveHelper
-                                                //                 .isDesktop(
-                                                //                     context)
-                                                //             ? Dimensions
-                                                //                 .PADDING_SIZE_EXTRA_SMALL
-                                                //             : 0,
-                                                //       ),
-                                                //     ),
-                                                //   );
-                                                // }),
-                                              ])
-                                        : ModuleView(
-                                            splashController: splashController),
-                                  )),
-                                ),
-                              ],
-                            ),
-                ),
+                              SliverToBoxAdapter(
+                                child: Center(
+                                    child: SizedBox(
+                                  width: Dimensions.WEB_MAX_WIDTH,
+                                  child: !_showMobileModule
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                              BannerView(isFeatured: false),
+                                              CategoryView(),
+                                              // PopularStoreView(
+                                              //     isPopular: true,
+                                              //     isFeatured: false),
+                                              ItemCampaignView(),
+                                              TrendingNowView(
+                                                  isPopular:
+                                                      true), //trending now
+                                              BrandView(),
+                                              // PopularStoreView(
+                                              //     isPopular: false,
+                                              //     isFeatured: false),
+                                              TrendingNowView(isPopular: false),
+                                              // Padding(
+                                              //   padding: EdgeInsets.fromLTRB(
+                                              //       10, 15, 0, 5),
+                                              //   child: Row(children: [
+                                              //     Expanded(
+                                              //         child: Text(
+                                              //       Get.find<SplashController>()
+                                              //               .configModel
+                                              //               .moduleConfig
+                                              //               .module
+                                              //               .showRestaurantText
+                                              //           ? 'all_restaurants'.tr
+                                              //           : 'all_stores'.tr,
+                                              //       style: robotoMedium.copyWith(
+                                              //           fontSize: Dimensions
+                                              //               .fontSizeLarge),
+                                              //     )),
+                                              //     FilterView(),
+                                              //   ]),
+                                              // ),
+                                              // GetBuilder<StoreController>(
+                                              //     builder: (storeController) {
+                                              //   return PaginatedListView(
+                                              //     scrollController:
+                                              //         _scrollController,
+                                              //     totalSize: storeController
+                                              //                 .storeModel !=
+                                              //             null
+                                              //         ? storeController
+                                              //             .storeModel
+                                              //             .totalSize
+                                              //         : null,
+                                              //     offset: storeController
+                                              //                 .storeModel !=
+                                              //             null
+                                              //         ? storeController
+                                              //             .storeModel.offset
+                                              //         : null,
+                                              //     onPaginate: (int
+                                              //             offset) async =>
+                                              //         await storeController
+                                              //             .getStoreList(
+                                              //                 offset, false),
+                                              //     itemView: ItemsView(
+                                              //       isStore: true,
+                                              //       items: null,
+                                              //       stores: storeController
+                                              //                   .storeModel !=
+                                              //               null
+                                              //           ? storeController
+                                              //               .storeModel.stores
+                                              //           : null,
+                                              //       padding:
+                                              //           EdgeInsets.symmetric(
+                                              //         horizontal: ResponsiveHelper
+                                              //                 .isDesktop(
+                                              //                     context)
+                                              //             ? Dimensions
+                                              //                 .PADDING_SIZE_EXTRA_SMALL
+                                              //             : Dimensions
+                                              //                 .PADDING_SIZE_SMALL,
+                                              //         vertical: ResponsiveHelper
+                                              //                 .isDesktop(
+                                              //                     context)
+                                              //             ? Dimensions
+                                              //                 .PADDING_SIZE_EXTRA_SMALL
+                                              //             : 0,
+                                              //       ),
+                                              //     ),
+                                              //   );
+                                              // }),
+                                            ])
+                                      : ModuleView(
+                                          splashController: splashController),
+                                )),
+                              ),
+                            ],
+                          ),
               ),
       );
     });

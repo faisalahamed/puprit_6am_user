@@ -29,7 +29,7 @@ class TrendingNowView extends StatelessWidget {
       return (_itemList != null && _itemList.length == 0)
           ? SizedBox()
           : Container(
-              color: Colors.grey[200],
+              color: Colors.white,
               padding: EdgeInsets.only(bottom: 20.0),
               child: Column(
                 children: [
@@ -75,14 +75,23 @@ class TrendingNowView extends StatelessWidget {
                                           Dimensions.RADIUS_SMALL),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.grey[
-                                              Get.find<ThemeController>()
-                                                      .darkTheme
-                                                  ? 800
-                                                  : 300],
-                                          blurRadius: 5,
-                                          spreadRadius: 1,
-                                        )
+                                            color: Colors.grey[
+                                                Get.find<ThemeController>()
+                                                        .darkTheme
+                                                    ? 800
+                                                    : 300],
+                                            blurRadius: 2,
+                                            spreadRadius: 1.2,
+                                            offset: Offset(-2, -2)),
+                                        BoxShadow(
+                                            color: Colors.grey[
+                                                Get.find<ThemeController>()
+                                                        .darkTheme
+                                                    ? 800
+                                                    : 300],
+                                            blurRadius: 2,
+                                            spreadRadius: 1.2,
+                                            offset: Offset(2, 2))
                                       ],
                                     ),
                                     child: Column(
