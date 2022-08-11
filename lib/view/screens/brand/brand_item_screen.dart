@@ -1,4 +1,5 @@
-import 'package:sixam_mart/controller/category_controller.dart';
+import 'package:sixam_mart/controller/brand_controller.dart';
+// import 'package:sixam_mart/controller/category_controller.dart';
 import 'package:sixam_mart/controller/localization_controller.dart';
 import 'package:sixam_mart/controller/splash_controller.dart';
 import 'package:sixam_mart/data/model/response/item_model.dart';
@@ -15,16 +16,16 @@ import 'package:sixam_mart/view/base/web_menu_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryItemScreen extends StatefulWidget {
+class BrandItemScreen extends StatefulWidget {
   final String categoryID;
   final String categoryName;
-  CategoryItemScreen({@required this.categoryID, @required this.categoryName});
+  BrandItemScreen({@required this.categoryID, @required this.categoryName});
 
   @override
-  _CategoryItemScreenState createState() => _CategoryItemScreenState();
+  _BrandItemScreenState createState() => _BrandItemScreenState();
 }
 
-class _CategoryItemScreenState extends State<CategoryItemScreen>
+class _BrandItemScreenState extends State<BrandItemScreen>
     with TickerProviderStateMixin {
   final ScrollController scrollController = ScrollController();
   final ScrollController storeScrollController = ScrollController();
@@ -36,26 +37,26 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
     super.initState();
 
     _tabController = TabController(length: 1, initialIndex: 0, vsync: this);
-    Get.find<CategoryController>().getSubCategoryList(widget.categoryID);
+    Get.find<BrandController>().getSubCategoryList(widget.categoryID);
     scrollController?.addListener(() {
       if (scrollController.position.pixels ==
               scrollController.position.maxScrollExtent &&
-          Get.find<CategoryController>().categoryItemList != null &&
-          !Get.find<CategoryController>().isLoading) {
-        int pageSize = (Get.find<CategoryController>().pageSize / 10).ceil();
-        if (Get.find<CategoryController>().offset < pageSize) {
+          Get.find<BrandController>().categoryItemList != null &&
+          !Get.find<BrandController>().isLoading) {
+        int pageSize = (Get.find<BrandController>().pageSize / 10).ceil();
+        if (Get.find<BrandController>().offset < pageSize) {
           print('end of the page');
-          Get.find<CategoryController>().showBottomLoader();
-          Get.find<CategoryController>().getCategoryItemList(
-            Get.find<CategoryController>().subCategoryIndex == 0
+          Get.find<BrandController>().showBottomLoader();
+          Get.find<BrandController>().getCategoryItemList(
+            Get.find<BrandController>().subCategoryIndex == 0
                 ? widget.categoryID
-                : Get.find<CategoryController>()
+                : Get.find<BrandController>()
                     .subCategoryList[
-                        Get.find<CategoryController>().subCategoryIndex]
+                        Get.find<BrandController>().subCategoryIndex]
                     .id
                     .toString(),
-            Get.find<CategoryController>().offset + 1,
-            Get.find<CategoryController>().type,
+            Get.find<BrandController>().offset + 1,
+            Get.find<BrandController>().type,
             false,
           );
         }
@@ -64,23 +65,22 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
     storeScrollController?.addListener(() {
       if (scrollController.position.pixels ==
               scrollController.position.maxScrollExtent &&
-          Get.find<CategoryController>().categoryStoreList != null &&
-          !Get.find<CategoryController>().isLoading) {
-        int pageSize =
-            (Get.find<CategoryController>().restPageSize / 10).ceil();
-        if (Get.find<CategoryController>().offset < pageSize) {
+          Get.find<BrandController>().categoryStoreList != null &&
+          !Get.find<BrandController>().isLoading) {
+        int pageSize = (Get.find<BrandController>().restPageSize / 10).ceil();
+        if (Get.find<BrandController>().offset < pageSize) {
           print('end of the page');
-          Get.find<CategoryController>().showBottomLoader();
-          Get.find<CategoryController>().getCategoryStoreList(
-            Get.find<CategoryController>().subCategoryIndex == 0
+          Get.find<BrandController>().showBottomLoader();
+          Get.find<BrandController>().getCategoryStoreList(
+            Get.find<BrandController>().subCategoryIndex == 0
                 ? widget.categoryID
-                : Get.find<CategoryController>()
+                : Get.find<BrandController>()
                     .subCategoryList[
-                        Get.find<CategoryController>().subCategoryIndex]
+                        Get.find<BrandController>().subCategoryIndex]
                     .id
                     .toString(),
-            Get.find<CategoryController>().offset + 1,
-            Get.find<CategoryController>().type,
+            Get.find<BrandController>().offset + 1,
+            Get.find<BrandController>().type,
             false,
           );
         }
@@ -90,32 +90,32 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CategoryController>(builder: (catController) {
+    return GetBuilder<BrandController>(builder: (brandController) {
       List<Item> _item;
       List<Store> _stores;
-      if (catController.categoryItemList != null &&
-          catController.searchItemList != null) {
+      if (brandController.categoryItemList != null &&
+          brandController.searchItemList != null) {
         _item = [];
-        if (catController.isSearching) {
-          _item.addAll(catController.searchItemList);
+        if (brandController.isSearching) {
+          _item.addAll(brandController.searchItemList);
         } else {
-          _item.addAll(catController.categoryItemList);
+          _item.addAll(brandController.categoryItemList);
         }
       }
-      if (catController.categoryStoreList != null &&
-          catController.searchStoreList != null) {
+      if (brandController.categoryStoreList != null &&
+          brandController.searchStoreList != null) {
         _stores = [];
-        if (catController.isSearching) {
-          _stores.addAll(catController.searchStoreList);
+        if (brandController.isSearching) {
+          _stores.addAll(brandController.searchStoreList);
         } else {
-          _stores.addAll(catController.categoryStoreList);
+          _stores.addAll(brandController.categoryStoreList);
         }
       }
 
       return WillPopScope(
         onWillPop: () async {
-          if (catController.isSearching) {
-            catController.toggleSearch();
+          if (brandController.isSearching) {
+            brandController.toggleSearch();
             return false;
           } else {
             return true;
@@ -125,7 +125,7 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
           appBar: ResponsiveHelper.isDesktop(context)
               ? WebMenuBar()
               : AppBar(
-                  title: catController.isSearching
+                  title: brandController.isSearching
                       ? TextField(
                           autofocus: true,
                           textInputAction: TextInputAction.search,
@@ -136,16 +136,16 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
                           style: robotoRegular.copyWith(
                               fontSize: Dimensions.fontSizeLarge),
                           onSubmitted: (String query) =>
-                              catController.searchData(
+                              brandController.searchData(
                             query,
-                            catController.subCategoryIndex == 0
+                            brandController.subCategoryIndex == 0
                                 ? widget.categoryID
-                                : catController
+                                : brandController
                                     .subCategoryList[
-                                        catController.subCategoryIndex]
+                                        brandController.subCategoryIndex]
                                     .id
                                     .toString(),
-                            catController.type,
+                            brandController.type,
                           ),
                         )
                       : Text(widget.categoryName,
@@ -158,8 +158,8 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
                     icon: Icon(Icons.arrow_back_ios),
                     color: Theme.of(context).textTheme.bodyText2.color,
                     onPressed: () {
-                      if (catController.isSearching) {
-                        catController.toggleSearch();
+                      if (brandController.isSearching) {
+                        brandController.toggleSearch();
                       } else {
                         Get.back();
                       }
@@ -169,9 +169,9 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
                   elevation: 0,
                   actions: [
                     IconButton(
-                      onPressed: () => catController.toggleSearch(),
+                      onPressed: () => brandController.toggleSearch(),
                       icon: Icon(
-                        catController.isSearching
+                        brandController.isSearching
                             ? Icons.close_sharp
                             : Icons.search,
                         color: Theme.of(context).textTheme.bodyText1.color,
@@ -190,95 +190,101 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
               child: SizedBox(
             width: Dimensions.WEB_MAX_WIDTH,
             child: Column(children: [
-              (catController.subCategoryList != null &&
-                      !catController.isSearching)
+              (brandController.subCategoryList != null &&
+                      !brandController.isSearching)
                   ? Center(
                       child: Container(
                       height: 50,
                       width: Dimensions.WEB_MAX_WIDTH,
-                      color: Theme.of(context).cardColor,
+                      // color: Theme.of(context).cardColor,
+                      color: Colors.red,
                       padding: EdgeInsets.symmetric(
                           vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: catController.subCategoryList.length,
-                        padding: EdgeInsets.only(
-                            left: Dimensions.PADDING_SIZE_SMALL),
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () => catController.setSubCategoryIndex(
-                                index, widget.categoryID),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                left: index == 0
-                                    ? Dimensions.PADDING_SIZE_LARGE
-                                    : Dimensions.PADDING_SIZE_SMALL,
-                                right: index ==
-                                        catController.subCategoryList.length - 1
-                                    ? Dimensions.PADDING_SIZE_LARGE
-                                    : Dimensions.PADDING_SIZE_SMALL,
-                                top: Dimensions.PADDING_SIZE_SMALL,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(
-                                    _ltr
-                                        ? index == 0
-                                            ? Dimensions.RADIUS_EXTRA_LARGE
-                                            : 0
-                                        : index ==
-                                                catController.subCategoryList
-                                                        .length -
-                                                    1
-                                            ? Dimensions.RADIUS_EXTRA_LARGE
-                                            : 0,
-                                  ),
-                                  right: Radius.circular(
-                                    _ltr
-                                        ? index ==
-                                                catController.subCategoryList
-                                                        .length -
-                                                    1
-                                            ? Dimensions.RADIUS_EXTRA_LARGE
-                                            : 0
-                                        : index == 0
-                                            ? Dimensions.RADIUS_EXTRA_LARGE
-                                            : 0,
-                                  ),
-                                ),
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.1),
-                              ),
-                              child: Column(children: [
-                                SizedBox(height: 3),
-                                Text(
-                                  catController.subCategoryList[index].name,
-                                  style: index == catController.subCategoryIndex
-                                      ? robotoMedium.copyWith(
-                                          fontSize: Dimensions.fontSizeSmall,
-                                          color: Theme.of(context).primaryColor)
-                                      : robotoRegular.copyWith(
-                                          fontSize: Dimensions.fontSizeSmall,
-                                          color:
-                                              Theme.of(context).disabledColor),
-                                ),
-                                index == catController.subCategoryIndex
-                                    ? Container(
-                                        height: 5,
-                                        width: 5,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            shape: BoxShape.circle),
-                                      )
-                                    : SizedBox(height: 5, width: 5),
-                              ]),
-                            ),
-                          );
-                        },
-                      ),
+                      
+                          // !All sub list
+                      // child: ListView.builder(
+                      //   scrollDirection: Axis.horizontal,
+                      //   // itemCount: brandController.subCategoryList.length,
+                      //   itemCount: 1,
+                      //   padding: EdgeInsets.only(
+                      //       left: Dimensions.PADDING_SIZE_SMALL),
+                      //   physics: BouncingScrollPhysics(),
+                      //   itemBuilder: (context, index) {
+                      //     return InkWell(
+                      //       onTap: () => brandController.setSubCategoryIndex(
+                      //           index, widget.categoryID),
+                      //       child: Container(
+                      //         padding: EdgeInsets.only(
+                      //           left: index == 0
+                      //               ? Dimensions.PADDING_SIZE_LARGE
+                      //               : Dimensions.PADDING_SIZE_SMALL,
+                      //           right: index ==
+                      //                   brandController.subCategoryList.length -
+                      //                       1
+                      //               ? Dimensions.PADDING_SIZE_LARGE
+                      //               : Dimensions.PADDING_SIZE_SMALL,
+                      //           top: Dimensions.PADDING_SIZE_SMALL,
+                      //         ),
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.horizontal(
+                      //             left: Radius.circular(
+                      //               _ltr
+                      //                   ? index == 0
+                      //                       ? Dimensions.RADIUS_EXTRA_LARGE
+                      //                       : 0
+                      //                   : index ==
+                      //                           brandController.subCategoryList
+                      //                                   .length -
+                      //                               1
+                      //                       ? Dimensions.RADIUS_EXTRA_LARGE
+                      //                       : 0,
+                      //             ),
+                      //             right: Radius.circular(
+                      //               _ltr
+                      //                   ? index ==
+                      //                           brandController.subCategoryList
+                      //                                   .length -
+                      //                               1
+                      //                       ? Dimensions.RADIUS_EXTRA_LARGE
+                      //                       : 0
+                      //                   : index == 0
+                      //                       ? Dimensions.RADIUS_EXTRA_LARGE
+                      //                       : 0,
+                      //             ),
+                      //           ),
+                      //           color: Theme.of(context)
+                      //               .primaryColor
+                      //               .withOpacity(0.1),
+                      //         ),
+                      //         child: Column(children: [
+                      //           SizedBox(height: 3),
+                      //           Text(
+                      //             brandController.subCategoryList[index].name,
+                      //             style: index ==
+                      //                     brandController.subCategoryIndex
+                      //                 ? robotoMedium.copyWith(
+                      //                     fontSize: Dimensions.fontSizeSmall,
+                      //                     color: Theme.of(context).primaryColor)
+                      //                 : robotoRegular.copyWith(
+                      //                     fontSize: Dimensions.fontSizeSmall,
+                      //                     color:
+                      //                         Theme.of(context).disabledColor),
+                      //           ),
+                      //           index == brandController.subCategoryIndex
+                      //               ? Container(
+                      //                   height: 5,
+                      //                   width: 5,
+                      //                   decoration: BoxDecoration(
+                      //                       color:
+                      //                           Theme.of(context).primaryColor,
+                      //                       shape: BoxShape.circle),
+                      //                 )
+                      //               : SizedBox(height: 5, width: 5),
+                      //         ]),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                     ))
                   : SizedBox(),
               Center(
@@ -354,46 +360,48 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
                   onNotification: (scrollNotification) {
                     if (scrollNotification is ScrollEndNotification) {
                       if ((_tabController.index == 1 &&
-                              !catController.isStore) ||
-                          _tabController.index == 0 && catController.isStore) {
-                        catController.setRestaurant(_tabController.index == 1);
-                        if (catController.isSearching) {
-                          catController.searchData(
-                            catController.searchText,
-                            catController.subCategoryIndex == 0
+                              !brandController.isStore) ||
+                          _tabController.index == 0 &&
+                              brandController.isStore) {
+                        brandController
+                            .setRestaurant(_tabController.index == 1);
+                        if (brandController.isSearching) {
+                          brandController.searchData(
+                            brandController.searchText,
+                            brandController.subCategoryIndex == 0
                                 ? widget.categoryID
-                                : catController
+                                : brandController
                                     .subCategoryList[
-                                        catController.subCategoryIndex]
+                                        brandController.subCategoryIndex]
                                     .id
                                     .toString(),
-                            catController.type,
+                            brandController.type,
                           );
                         } else {
                           if (_tabController.index == 1) {
-                            catController.getCategoryStoreList(
-                              catController.subCategoryIndex == 0
+                            brandController.getCategoryStoreList(
+                              brandController.subCategoryIndex == 0
                                   ? widget.categoryID
-                                  : catController
+                                  : brandController
                                       .subCategoryList[
-                                          catController.subCategoryIndex]
+                                          brandController.subCategoryIndex]
                                       .id
                                       .toString(),
                               1,
-                              catController.type,
+                              brandController.type,
                               false,
                             );
                           } else {
-                            catController.getCategoryItemList(
-                              catController.subCategoryIndex == 0
+                            brandController.getCategoryItemList(
+                              brandController.subCategoryIndex == 0
                                   ? widget.categoryID
-                                  : catController
+                                  : brandController
                                       .subCategoryList[
-                                          catController.subCategoryIndex]
+                                          brandController.subCategoryIndex]
                                       .id
                                       .toString(),
                               1,
-                              catController.type,
+                              brandController.type,
                               false,
                             );
                           }
@@ -421,7 +429,7 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
                   // ),
                 ),
               ),
-              catController.isLoading
+              brandController.isLoading
                   ? Center(
                       child: Padding(
                       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -437,3 +445,18 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
     });
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/foundation/key.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+
+// class BrandItemScreen extends StatelessWidget {
+//   final String categoryID;
+//   final String categoryName;
+//   BrandItemScreen({@required this.categoryID, @required this.categoryName});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(child: Text('brand'));
+//   }
+// }

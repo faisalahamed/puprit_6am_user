@@ -1,4 +1,5 @@
 import 'package:sixam_mart/data/api/api_checker.dart';
+import 'package:sixam_mart/data/model/response/brand_model.dart';
 import 'package:sixam_mart/data/model/response/category_model.dart';
 import 'package:sixam_mart/data/model/response/item_model.dart';
 import 'package:sixam_mart/data/model/response/store_model.dart';
@@ -11,8 +12,8 @@ class BrandController extends GetxController implements GetxService {
   final BrandRepo brandRepo;
   BrandController({@required this.brandRepo});
 
-  List<CategoryModel> _brandList;
-  List<CategoryModel> _subCategoryList;
+  List<BrandModel> _brandList;
+  List<BrandModel> _subCategoryList;
   List<Item> _categoryItemList;
   List<Store> _categoryStoreList;
   List<Item> _searchItemList = [];
@@ -30,8 +31,8 @@ class BrandController extends GetxController implements GetxService {
   String _itemResultText = '';
   int _offset = 1;
 
-  List<CategoryModel> get categoryList => _brandList;
-  List<CategoryModel> get subCategoryList => _subCategoryList;
+  List<BrandModel> get categoryList => _brandList;
+  List<BrandModel> get subCategoryList => _subCategoryList;
   List<Item> get categoryItemList => _categoryItemList;
   List<Store> get categoryStoreList => _categoryStoreList;
   List<Item> get searchItemList => _searchItemList;
@@ -58,7 +59,7 @@ class BrandController extends GetxController implements GetxService {
           _brandList = [];
           _interestSelectedList = [];
           response.body.forEach((category) {
-            _brandList.add(CategoryModel.fromJson(category));
+            _brandList.add(BrandModel.fromJson(category));
             _interestSelectedList.add(false);
           });
         } else {
@@ -75,16 +76,23 @@ class BrandController extends GetxController implements GetxService {
     _subCategoryIndex = 0;
     _subCategoryList = null;
     _categoryItemList = null;
-    Response response = await brandRepo.getSubCategoryList(categoryID);
-    if (response.statusCode == 200) {
-      _subCategoryList = [];
-      _subCategoryList
-          .add(CategoryModel(id: int.parse(categoryID), name: 'all'.tr));
-      response.body.forEach(
-          (category) => _subCategoryList.add(CategoryModel.fromJson(category)));
-      getCategoryItemList(categoryID, 1, 'all', false);
-    } else {
-      ApiChecker.checkApi(response);
+    try {
+      Response response = await brandRepo.getSubCategoryList(categoryID);
+
+      if (response.statusCode == 200) {
+        print('=======================subbra1' + response.body.toString());
+        _subCategoryList = [];
+        _subCategoryList = [];
+        _subCategoryList
+            .add(BrandModel(id: int.parse(categoryID), name: 'all'.tr));
+        response.body['products'].forEach(
+            (category) => _subCategoryList.add(BrandModel.fromJson(category)));
+        getCategoryItemList(categoryID, 1, 'all', false);
+      } else {
+        ApiChecker.checkApi(response);
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -128,6 +136,7 @@ class BrandController extends GetxController implements GetxService {
       if (offset == 1) {
         _categoryItemList = [];
       }
+      print(response.body.toString());
       _categoryItemList.addAll(ItemModel.fromJson(response.body).items);
       _pageSize = ItemModel.fromJson(response.body).totalSize;
       _isLoading = false;

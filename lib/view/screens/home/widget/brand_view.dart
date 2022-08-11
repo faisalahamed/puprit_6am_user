@@ -59,8 +59,13 @@ class BrandView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     // !
+                                    // onTap: () => Get.toNamed(
+                                    //     RouteHelper.getCategoryItemRoute(
+                                    //   brandController.categoryList[index].id,
+                                    //   brandController.categoryList[index].name,
+                                    // )),
                                     onTap: () => Get.toNamed(
-                                        RouteHelper.getCategoryItemRoute(
+                                        RouteHelper.getBrandItemRoute(
                                       brandController.categoryList[index].id,
                                       brandController.categoryList[index].name,
                                     )),

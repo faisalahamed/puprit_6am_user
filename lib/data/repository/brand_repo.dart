@@ -26,13 +26,13 @@ class BrandRepo {
   }
 
   Future<Response> getSubCategoryList(String parentID) async {
-    return await apiClient.getData('${AppConstants.SUB_CATEGORY_URI}$parentID');
+    return await apiClient.getData('${AppConstants.SUB_BRAND_URI}$parentID?limit=10&offset=0');
   }
 
   Future<Response> getCategoryItemList(
       String categoryID, int offset, String type) async {
     return await apiClient.getData(
-        '${AppConstants.CATEGORY_ITEM_URI}$categoryID?limit=10&offset=$offset&type=$type');
+        '${AppConstants.SUB_BRAND_URI}$categoryID?limit=10&offset=$offset&type=$type');
   }
 
   Future<Response> getCategoryStoreList(

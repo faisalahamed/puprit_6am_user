@@ -18,6 +18,7 @@ import 'package:sixam_mart/view/screens/address/add_address_screen.dart';
 import 'package:sixam_mart/view/screens/address/address_screen.dart';
 import 'package:sixam_mart/view/screens/auth/sign_in_screen.dart';
 import 'package:sixam_mart/view/screens/auth/sign_up_screen.dart';
+import 'package:sixam_mart/view/screens/brand/brand_item_screen.dart';
 import 'package:sixam_mart/view/screens/cart/cart_screen.dart';
 import 'package:sixam_mart/view/screens/category/category_item_screen.dart';
 import 'package:sixam_mart/view/screens/category/category_screen.dart';
@@ -96,6 +97,7 @@ class RouteHelper {
   static const String html = '/html';
   static const String categories = '/categories';
   static const String categoryItem = '/category-item';
+  static const String brandItem = '/brand-item';
   static const String popularItems = '/popular-items';
   static const String itemCampaign = '/item-campaign';
   static const String support = '/help-and-support';
@@ -184,6 +186,12 @@ class RouteHelper {
     List<int> _encoded = utf8.encode(name);
     String _data = base64Encode(_encoded);
     return '$categoryItem?id=$id&name=$_data';
+  }
+
+  static String getBrandItemRoute(int id, String name) {
+    List<int> _encoded = utf8.encode(name);
+    String _data = base64Encode(_encoded);
+    return '$brandItem?id=$id&name=$_data';
   }
 
   static String getPopularItemRoute(bool isPopular) =>
@@ -432,6 +440,15 @@ class RouteHelper {
               base64Decode(Get.parameters['name'].replaceAll(' ', '+'));
           String _data = utf8.decode(_decode);
           return getRoute(CategoryItemScreen(
+              categoryID: Get.parameters['id'], categoryName: _data));
+        }),
+    GetPage(
+        name: brandItem,
+        page: () {
+          List<int> _decode =
+              base64Decode(Get.parameters['name'].replaceAll(' ', '+'));
+          String _data = utf8.decode(_decode);
+          return getRoute(BrandItemScreen(
               categoryID: Get.parameters['id'], categoryName: _data));
         }),
     GetPage(

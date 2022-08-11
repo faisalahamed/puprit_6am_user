@@ -45,7 +45,7 @@ class DetailsAppBarState extends State<DetailsAppBar> with SingleTickerProviderS
       });
 
     return AppBar(
-      leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: Theme.of(context).textTheme.bodyText1.color), onPressed: () => Navigator.pop(context)),
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: Theme.of(context).textTheme.bodyText2.color), onPressed: () => Navigator.pop(context)),
       backgroundColor: Theme.of(context).cardColor,
       elevation: 0,
       title: Text(
