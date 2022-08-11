@@ -141,19 +141,19 @@ class TrendingNowView extends StatelessWidget {
                                                     SizedBox(
                                                         height: Dimensions
                                                             .PADDING_SIZE_EXTRA_SMALL),
-                                                    Text(
-                                                      _itemList[index]
-                                                          .storeName,
-                                                      style: robotoMedium.copyWith(
-                                                          fontSize: Dimensions
-                                                              .fontSizeExtraSmall,
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .disabledColor),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
+                                                    // Text(
+                                                    //   _itemList[index]
+                                                    //       .storeName,
+                                                    //   style: robotoMedium.copyWith(
+                                                    //       fontSize: Dimensions
+                                                    //           .fontSizeExtraSmall,
+                                                    //       color: Theme.of(
+                                                    //               context)
+                                                    //           .disabledColor),
+                                                    //   maxLines: 1,
+                                                    //   overflow:
+                                                    //       TextOverflow.ellipsis,
+                                                    // ),
                                                     // RatingBar(
                                                     //   rating: _itemList[index]
                                                     //       .avgRating,

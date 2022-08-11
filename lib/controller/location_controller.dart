@@ -75,6 +75,7 @@ class LocationController extends GetxController implements GetxService {
     try {
       Position newLocalData = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       _myPosition = newLocalData;
+      
     }catch(e) {
       _myPosition = Position(
         latitude: defaultLatLng != null ? defaultLatLng.latitude : double.parse(Get.find<SplashController>().configModel.defaultLocation.lat ?? '0'),

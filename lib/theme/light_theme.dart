@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData light({Color color = const Color(0xFF039D55)}) => ThemeData(
+ThemeData light({Color color = const Color(0xFF4a9410)}) => ThemeData(
       fontFamily: 'Roboto',
       primaryColor: color,
       secondaryHeaderColor: Color(0xFF1ED7AA),
@@ -13,4 +13,7 @@ ThemeData light({Color color = const Color(0xFF039D55)}) => ThemeData(
       colorScheme: ColorScheme.light(primary: color, secondary: color),
       textButtonTheme:
           TextButtonThemeData(style: TextButton.styleFrom(primary: color)),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(color: Colors.white),
+      ),
     );
