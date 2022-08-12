@@ -147,6 +147,7 @@ class CheckoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20),
       width: Dimensions.WEB_MAX_WIDTH,
       padding: ResponsiveHelper.isDesktop(context) ? EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_LARGE) : EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       child: CustomButton(buttonText: 'proceed_to_checkout'.tr, onPressed: () {

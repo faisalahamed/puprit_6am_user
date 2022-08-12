@@ -185,7 +185,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               textStyle: robotoRegular.copyWith(
                                 fontSize: Dimensions.fontSizeLarge,
                                 color:
-                                    Theme.of(context).textTheme.bodyText1.color,
+                                    Theme.of(context).textTheme.bodyText2.color,
                               ),
                             ),
                             //  Container(color: Colors.redAccent,child: Text('12'),) ,

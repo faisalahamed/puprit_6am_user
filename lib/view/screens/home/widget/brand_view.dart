@@ -36,6 +36,7 @@ class BrandView extends StatelessWidget {
                     Expanded(
                       child: Container(
                         // color: Colors.amberAccent,
+
                         padding: EdgeInsets.only(top: 6, left: 4),
                         height: 250,
                         child: brandController.categoryList != null
@@ -44,8 +45,8 @@ class BrandView extends StatelessWidget {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  crossAxisSpacing: 1.0,
-                                  mainAxisSpacing: 1.0,
+                                  crossAxisSpacing: 6.0,
+                                  mainAxisSpacing: 6.0,
                                 ),
                                 controller: _scrollController,
                                 itemCount:
@@ -70,57 +71,35 @@ class BrandView extends StatelessWidget {
                                       brandController.categoryList[index].name,
                                     )),
                                     child: Container(
-                                      // color: Colors.blueAccent,
-                                      // padding: EdgeInsets.only(top: 10),
-                                      // width: 120,
-                                      child: Column(children: [
-                                        Container(
-                                          height: 110,
-                                          // width: 150,
-                                          // margin: EdgeInsets.only(
-                                          //   left: index == 0
-                                          //       ? 0
-                                          //       : Dimensions
-                                          //           .PADDING_SIZE_EXTRA_SMALL,
-                                          //   right: Dimensions
-                                          //       .PADDING_SIZE_EXTRA_SMALL,
-                                          // ),
-                                          child: Stack(children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      Dimensions.RADIUS_SMALL),
-                                              child: CustomImage(
-                                                image: AppConstants
-                                                        .BRAND_IMAGE_URI +
-                                                    '/${brandController.categoryList[index].image}',
-                                                // height: 50,
-                                                // width: 50,
-                                                // fit: BoxFit.cover,
-                                              ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).cardColor,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.RADIUS_SMALL),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[
+                                                  Get.isDarkMode ? 800 : 200],
+                                              spreadRadius: 1,
+                                              blurRadius: 5)
+                                        ],
+                                      ),
+                                      child: Container(
+                                        padding: EdgeInsets.all(1),
+                                        child: Stack(children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.RADIUS_SMALL),
+                                            child: CustomImage(
+                                              image: AppConstants
+                                                      .BRAND_IMAGE_URI +
+                                                  '/${brandController.categoryList[index].image}',
+                                              // height: 50,
+                                              // width: 50,
+                                              // fit: BoxFit.cover,
                                             ),
-                                          ]),
-                                        ),
-                                        // SizedBox(
-                                        //     height: Dimensions
-                                        //         .PADDING_SIZE_EXTRA_SMALL),
-                                        // Padding(
-                                        //   padding: EdgeInsets.only(
-                                        //       right: index == 0
-                                        //           ? Dimensions
-                                        //               .PADDING_SIZE_EXTRA_SMALL
-                                        //           : 0),
-                                        //   child: Text(
-                                        //     brandController
-                                        //         .categoryList[index].name,
-                                        //     style: robotoMedium.copyWith(
-                                        //         fontSize: 11),
-                                        //     maxLines: 2,
-                                        //     overflow: TextOverflow.ellipsis,
-                                        //     textAlign: TextAlign.center,
-                                        //   ),
-                                        // ),
-                                      ]),
+                                          ),
+                                        ]),
+                                      ),
                                     ),
                                   );
                                 },

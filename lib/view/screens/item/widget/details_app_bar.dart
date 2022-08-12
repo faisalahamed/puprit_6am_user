@@ -50,7 +50,7 @@ class DetailsAppBarState extends State<DetailsAppBar> with SingleTickerProviderS
       elevation: 0,
       title: Text(
         'item_details'.tr,
-        style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge, color: Theme.of(context).textTheme.bodyText1.color),
+        style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge, color: Theme.of(context).textTheme.bodyText2.color),
       ),
       centerTitle: true,
       actions: [AnimatedBuilder(

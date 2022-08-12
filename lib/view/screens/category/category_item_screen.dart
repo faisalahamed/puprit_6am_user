@@ -1,16 +1,13 @@
 import 'package:sixam_mart/controller/category_controller.dart';
 import 'package:sixam_mart/controller/localization_controller.dart';
-import 'package:sixam_mart/controller/splash_controller.dart';
 import 'package:sixam_mart/data/model/response/item_model.dart';
 import 'package:sixam_mart/data/model/response/store_model.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
-import 'package:sixam_mart/helper/route_helper.dart';
 import 'package:sixam_mart/util/dimensions.dart';
 import 'package:sixam_mart/util/styles.dart';
-import 'package:sixam_mart/view/base/cart_widget.dart';
+import 'package:sixam_mart/view/base/custom_app_bar.dart';
 import 'package:sixam_mart/view/base/item_view.dart';
 import 'package:sixam_mart/view/base/menu_drawer.dart';
-import 'package:sixam_mart/view/base/veg_filter_widget.dart';
 import 'package:sixam_mart/view/base/web_menu_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,67 +121,69 @@ class _CategoryItemScreenState extends State<CategoryItemScreen>
         child: Scaffold(
           appBar: ResponsiveHelper.isDesktop(context)
               ? WebMenuBar()
-              : AppBar(
-                  title: catController.isSearching
-                      ? TextField(
-                          autofocus: true,
-                          textInputAction: TextInputAction.search,
-                          decoration: InputDecoration(
-                            hintText: 'Search...',
-                            border: InputBorder.none,
-                          ),
-                          style: robotoRegular.copyWith(
-                              fontSize: Dimensions.fontSizeLarge),
-                          onSubmitted: (String query) =>
-                              catController.searchData(
-                            query,
-                            catController.subCategoryIndex == 0
-                                ? widget.categoryID
-                                : catController
-                                    .subCategoryList[
-                                        catController.subCategoryIndex]
-                                    .id
-                                    .toString(),
-                            catController.type,
-                          ),
-                        )
-                      : Text(widget.categoryName,
-                          style: robotoRegular.copyWith(
-                            fontSize: Dimensions.fontSizeLarge,
-                            color: Theme.of(context).textTheme.bodyText2.color,
-                          )),
-                  centerTitle: true,
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    color: Theme.of(context).textTheme.bodyText2.color,
-                    onPressed: () {
-                      if (catController.isSearching) {
-                        catController.toggleSearch();
-                      } else {
-                        Get.back();
-                      }
-                    },
-                  ),
-                  backgroundColor: Theme.of(context).cardColor,
-                  elevation: 0,
-                  actions: [
-                    IconButton(
-                      onPressed: () => catController.toggleSearch(),
-                      icon: Icon(
-                        catController.isSearching
-                            ? Icons.close_sharp
-                            : Icons.search,
-                        color: Theme.of(context).textTheme.bodyText1.color,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => Get.toNamed(RouteHelper.getCartRoute()),
-                      icon: CartWidget(
-                          color: Theme.of(context).textTheme.bodyText2.color,
-                          size: 25),
-                    ),
-                  ],
-                ),
+              : CustomAppBar(title: widget.categoryName),
+          // AppBar(
+          //     title: catController.isSearching
+          //         ? TextField(
+          //             autofocus: true,
+          //             textInputAction: TextInputAction.search,
+          //             decoration: InputDecoration(
+          //               hintText: 'Search...',
+          //               border: InputBorder.none,
+          //             ),
+          //             style: robotoRegular.copyWith(
+          //                 fontSize: Dimensions.fontSizeLarge),
+          //             onSubmitted: (String query) =>
+          //                 catController.searchData(
+          //               query,
+          //               catController.subCategoryIndex == 0
+          //                   ? widget.categoryID
+          //                   : catController
+          //                       .subCategoryList[
+          //                           catController.subCategoryIndex]
+          //                       .id
+          //                       .toString(),
+          //               catController.type,
+          //             ),
+          //           )
+          //         : Text(widget.categoryName,
+          //             style: robotoRegular.copyWith(
+          //               fontSize: Dimensions.fontSizeLarge,
+          //               color: Theme.of(context).textTheme.bodyText2.color,
+          //             )),
+          //     centerTitle: true,
+          //     leading: IconButton(
+          //       icon: Icon(Icons.arrow_back_ios),
+          //       color: Theme.of(context).textTheme.bodyText2.color,
+          //       onPressed: () {
+          //         if (catController.isSearching) {
+          //           catController.toggleSearch();
+          //         } else {
+          //           Get.back();
+          //         }
+          //       },
+          //     ),
+          //     backgroundColor: Theme.of(context).primaryColor,
+          //     elevation: 0,
+          //     actions: [
+          //       IconButton(
+          //         onPressed: () => catController.toggleSearch(),
+          //         icon: Icon(
+          //           catController.isSearching
+          //               ? Icons.close_sharp
+          //               : Icons.search,
+          //           color: Theme.of(context).textTheme.bodyText2.color,
+          //         ),
+          //       ),
+          //       IconButton(
+          //         onPressed: () => Get.toNamed(RouteHelper.getCartRoute()),
+          //         icon: CartWidget(
+          //             color: Theme.of(context).textTheme.bodyText2.color,
+          //             size: 25),
+          //       ),
+          //     ],
+          //   ),
+
           endDrawer: MenuDrawer(),
           body: Center(
               child: SizedBox(

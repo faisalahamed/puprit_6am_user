@@ -22,7 +22,7 @@ class CartWidget extends StatelessWidget {
           child: Container(
             height: size < 20 ? 10 : size/2, width: size < 20 ? 10 : size/2, alignment: Alignment.center,
             decoration: BoxDecoration(
-              shape: BoxShape.circle, color: fromStore ? Theme.of(context).cardColor : Theme.of(context).primaryColor,
+              shape: BoxShape.circle, color: fromStore ? Theme.of(context).cardColor : Theme.of(context).errorColor,
               border: Border.all(width: size < 20 ? 0.7 : 1, color: fromStore ? Theme.of(context).primaryColor : Theme.of(context).cardColor),
             ),
             child: Text(

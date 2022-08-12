@@ -27,169 +27,153 @@ class CategoryView extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: TitleWidget(
                     title: 'categories'.tr,
-                    // onTap: () => Get.toNamed(RouteHelper.getCategoryRoute()),
+                    onTap: () => Get.toNamed(RouteHelper.getCategoryRoute()),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        // color: Colors.amberAccent,
-                        height: 260,
-                        child: categoryController.categoryList != null
-                            ? GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 5.0,
-                                  // mainAxisSpacing: 5.0,
-                                ),
-                                controller: _scrollController,
-                                itemCount:
-                                    categoryController.categoryList.length > 15
-                                        ? 15
-                                        : categoryController
-                                            .categoryList.length,
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.PADDING_SIZE_SMALL),
-                                // physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 1),
-                                    child: InkWell(
-                                      // !
-                                      onTap: () => Get.toNamed(
-                                          RouteHelper.getCategoryItemRoute(
-                                        categoryController
-                                            .categoryList[index].id,
+                Container(
+                  // color: Colors.amberAccent,
+                  padding: EdgeInsets.fromLTRB(4, 10, 10, 12),
+                  height: 270,
+                  child: categoryController.categoryList != null
+                      ? GridView.builder(
+                          // physics: NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 4.0,
+                            mainAxisSpacing: 4.0,
+                          ),
+                          controller: _scrollController,
+                          itemCount: categoryController.categoryList.length > 15
+                              ? 15
+                              : categoryController.categoryList.length,
+                          padding: EdgeInsets.only(
+                              left: Dimensions.PADDING_SIZE_SMALL),
+                          // physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 1),
+                              child: InkWell(
+                                // !
+                                onTap: () => Get.toNamed(
+                                    RouteHelper.getCategoryItemRoute(
+                                  categoryController.categoryList[index].id,
+                                  categoryController.categoryList[index].name,
+                                )),
+                                child: Container(
+                                  width: 110,
+                                  child: Column(children: [
+                                    Container(
+                                      //     padding: EdgeInsets.all(
+                                      // Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).cardColor,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.RADIUS_SMALL),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[
+                                                  Get.isDarkMode ? 800 : 200],
+                                              spreadRadius: 1,
+                                              blurRadius: 5)
+                                        ],
+                                      ),
+                                      // color: Colors.blueAccent,
+                                      height: 90,
+                                      // width: 150,
+                                      // margin: EdgeInsets.only(
+                                      //   left: index == 0
+                                      //       ? 0
+                                      //       : Dimensions
+                                      //           .PADDING_SIZE_EXTRA_SMALL,
+                                      //   right: Dimensions
+                                      //       .PADDING_SIZE_EXTRA_SMALL,
+                                      // ),
+                                      child: Container(
+                                        padding: EdgeInsets.all(1),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.RADIUS_SMALL),
+                                        ),
+                                        child: CustomImage(
+                                          image:
+                                              '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',
+                                          // height: 50,
+                                          // width: 50,
+                                          // fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        height: Dimensions
+                                            .PADDING_SIZE_EXTRA_SMALL),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          right: index == 0
+                                              ? Dimensions
+                                                  .PADDING_SIZE_EXTRA_SMALL
+                                              : 0),
+                                      child: Text(
                                         categoryController
                                             .categoryList[index].name,
-                                      )),
-                                      child: Container(
-                                        width: 120,
-                                        child: Column(children: [
-                                          Container(
-                                            //     padding: EdgeInsets.all(
-                                            // Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    Theme.of(context).cardColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors
-                                                          .grey[Get.find<
-                                                                  ThemeController>()
-                                                              .darkTheme
-                                                          ? 800
-                                                          : 300],
-                                                      blurRadius: 8,
-                                                      spreadRadius: 2,
-                                                      offset: Offset(-2, -2))
-                                                ]),
-                                            // color: Colors.blueAccent,
-                                            height: 100,
-                                            // width: 150,
-                                            // margin: EdgeInsets.only(
-                                            //   left: index == 0
-                                            //       ? 0
-                                            //       : Dimensions
-                                            //           .PADDING_SIZE_EXTRA_SMALL,
-                                            //   right: Dimensions
-                                            //       .PADDING_SIZE_EXTRA_SMALL,
-                                            // ),
-                                            child: Stack(children: [
-                                              ClipRRect(
-                                                // borderRadius:
-                                                //     BorderRadius.circular(
-                                                //         Dimensions
-                                                //             .RADIUS_SMALL),
-                                                child: CustomImage(
-                                                  image:
-                                                      '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',
-                                                  // height: 50,
-                                                  // width: 50,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ]),
-                                          ),
-                                          SizedBox(
-                                              height: Dimensions
-                                                  .PADDING_SIZE_EXTRA_SMALL),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                right: index == 0
-                                                    ? Dimensions
-                                                        .PADDING_SIZE_EXTRA_SMALL
-                                                    : 0),
-                                            child: Text(
-                                              categoryController
-                                                  .categoryList[index].name,
-                                              style: robotoMedium.copyWith(
-                                                  fontSize: 11),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ]),
+                                        style:
+                                            robotoMedium.copyWith(fontSize: 11),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  );
-                                },
-                              )
-                            : CategoryShimmer(
-                                categoryController: categoryController),
-                      ),
-                    ),
-                    ResponsiveHelper.isMobile(context)
-                        ? SizedBox()
-                        : categoryController.categoryList != null
-                            ? Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (con) => Dialog(
-                                              child: Container(
-                                                  height: 550,
-                                                  width: 600,
-                                                  child: CategoryPopUp(
-                                                    categoryController:
-                                                        categoryController,
-                                                  ))));
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: Dimensions.PADDING_SIZE_SMALL),
-                                      child: CircleAvatar(
-                                        radius: 35,
-                                        backgroundColor:
-                                            Theme.of(context).primaryColor,
-                                        child: Text('view_all'.tr,
-                                            style: TextStyle(
-                                                fontSize: Dimensions
-                                                    .PADDING_SIZE_DEFAULT,
-                                                color: Theme.of(context)
-                                                    .cardColor)),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  )
-                                ],
-                              )
-                            : CategoryAllShimmer(
-                                categoryController: categoryController)
-                  ],
+                                  ]),
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : CategoryShimmer(categoryController: categoryController),
                 ),
+                ResponsiveHelper.isMobile(context)
+                    ? SizedBox()
+                    : categoryController.categoryList != null
+                        ? Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (con) => Dialog(
+                                          child: Container(
+                                              height: 550,
+                                              width: 600,
+                                              child: CategoryPopUp(
+                                                categoryController:
+                                                    categoryController,
+                                              ))));
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      right: Dimensions.PADDING_SIZE_SMALL),
+                                  child: CircleAvatar(
+                                    radius: 35,
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    child: Text('view_all'.tr,
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.PADDING_SIZE_DEFAULT,
+                                            color:
+                                                Theme.of(context).cardColor)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          )
+                        : CategoryAllShimmer(
+                            categoryController: categoryController),
               ],
             );
     });

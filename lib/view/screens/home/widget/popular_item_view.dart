@@ -29,7 +29,7 @@ class TrendingNowView extends StatelessWidget {
       return (_itemList != null && _itemList.length == 0)
           ? SizedBox()
           : Container(
-              color: Colors.white,
+              color: Get.isDarkMode ? Colors.black : Colors.white,
               padding: EdgeInsets.only(bottom: 20.0),
               child: Column(
                 children: [
@@ -76,29 +76,13 @@ class TrendingNowView extends StatelessWidget {
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[
-                                                Get.find<ThemeController>()
-                                                        .darkTheme
-                                                    ? 800
-                                                    : 300],
-                                            blurRadius: 2,
-                                            spreadRadius: 1.2,
-                                            offset: Offset(-2, -2)),
-                                        BoxShadow(
-                                            color: Colors.grey[
-                                                Get.find<ThemeController>()
-                                                        .darkTheme
-                                                    ? 800
-                                                    : 300],
-                                            blurRadius: 2,
-                                            spreadRadius: 1.2,
-                                            offset: Offset(2, 2))
+                                                Get.isDarkMode ? 800 : 200],
+                                            spreadRadius: 1,
+                                            blurRadius: 5)
                                       ],
                                     ),
                                     child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                   
                                         children: [
                                           Stack(children: [
                                             ClipRRect(
@@ -109,8 +93,8 @@ class TrendingNowView extends StatelessWidget {
                                                 image:
                                                     '${Get.find<SplashController>().configModel.baseUrls.itemImageUrl}'
                                                     '/${_itemList[index].image}',
-                                                height: 80,
-                                                width: 80,
+                                                // height: 80,
+                                                // width: 80,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -127,110 +111,112 @@ class TrendingNowView extends StatelessWidget {
                                                 ? SizedBox()
                                                 : NotAvailableWidget(),
                                           ]),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: Dimensions
-                                                      .PADDING_SIZE_EXTRA_SMALL),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      _itemList[index].name,
-                                                      style: robotoMedium.copyWith(
-                                                          fontSize: Dimensions
-                                                              .fontSizeSmall),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    SizedBox(
-                                                        height: Dimensions
-                                                            .PADDING_SIZE_EXTRA_SMALL),
-                                                    // Text(
-                                                    //   _itemList[index]
-                                                    //       .storeName,
-                                                    //   style: robotoMedium.copyWith(
-                                                    //       fontSize: Dimensions
-                                                    //           .fontSizeExtraSmall,
-                                                    //       color: Theme.of(
-                                                    //               context)
-                                                    //           .disabledColor),
-                                                    //   maxLines: 1,
-                                                    //   overflow:
-                                                    //       TextOverflow.ellipsis,
-                                                    // ),
-                                                    // RatingBar(
-                                                    //   rating: _itemList[index]
-                                                    //       .avgRating,
-                                                    //   size: 12,
-                                                    //   ratingCount:
-                                                    //       _itemList[index]
-                                                    //           .ratingCount,
-                                                    // ),
-                                                    Row(children: [
-                                                      Expanded(
-                                                        child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                PriceConverter
-                                                                    .convertPrice(
-                                                                  itemController
-                                                                      .getStartingPrice(
-                                                                          _itemList[
-                                                                              index]),
-                                                                  discount: _itemList[
-                                                                          index]
-                                                                      .discount,
-                                                                  discountType:
-                                                                      _itemList[
-                                                                              index]
-                                                                          .discountType,
-                                                                ),
-                                                                style: robotoBold
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeSmall),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: Dimensions
+                                                    .PADDING_SIZE_EXTRA_SMALL),
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    _itemList[index].name,
+                                                    style:
+                                                        robotoMedium.copyWith(
+                                                            fontSize: Dimensions
+                                                                .fontSizeSmall),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  SizedBox(
+                                                      height: Dimensions
+                                                          .PADDING_SIZE_EXTRA_SMALL),
+                                                  // Text(
+                                                  //   _itemList[index]
+                                                  //       .storeName,
+                                                  //   style: robotoMedium.copyWith(
+                                                  //       fontSize: Dimensions
+                                                  //           .fontSizeExtraSmall,
+                                                  //       color: Theme.of(
+                                                  //               context)
+                                                  //           .disabledColor),
+                                                  //   maxLines: 1,
+                                                  //   overflow:
+                                                  //       TextOverflow.ellipsis,
+                                                  // ),
+                                                  // RatingBar(
+                                                  //   rating: _itemList[index]
+                                                  //       .avgRating,
+                                                  //   size: 12,
+                                                  //   ratingCount:
+                                                  //       _itemList[index]
+                                                  //           .ratingCount,
+                                                  // ),
+                                                  Row(children: [
+                                                    Expanded(
+                                                      child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              PriceConverter
+                                                                  .convertPrice(
+                                                                itemController
+                                                                    .getStartingPrice(
+                                                                        _itemList[
+                                                                            index]),
+                                                                discount: _itemList[
+                                                                        index]
+                                                                    .discount,
+                                                                discountType:
+                                                                    _itemList[
+                                                                            index]
+                                                                        .discountType,
                                                               ),
-                                                              SizedBox(
-                                                                  width: _itemList[index]
-                                                                              .discount >
-                                                                          0
-                                                                      ? Dimensions
-                                                                          .PADDING_SIZE_EXTRA_SMALL
-                                                                      : 0),
-                                                              _itemList[index]
-                                                                          .discount >
-                                                                      0
-                                                                  ? Flexible(
-                                                                      child:
-                                                                          Text(
-                                                                      PriceConverter.convertPrice(
-                                                                          itemController
-                                                                              .getStartingPrice(_itemList[index])),
-                                                                      style: robotoMedium
-                                                                          .copyWith(
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeExtraSmall,
-                                                                        color: Theme.of(context)
-                                                                            .disabledColor,
-                                                                        decoration:
-                                                                            TextDecoration.lineThrough,
-                                                                      ),
-                                                                    ))
-                                                                  : SizedBox(),
-                                                            ]),
-                                                      ),
-                                                      // Icon(Icons.add, size: 20),
-                                                    ]),
+                                                              style: robotoBold
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeSmall),
+                                                            ),
+                                                            SizedBox(
+                                                                width: _itemList[index]
+                                                                            .discount >
+                                                                        0
+                                                                    ? Dimensions
+                                                                        .PADDING_SIZE_EXTRA_SMALL
+                                                                    : 0),
+                                                            _itemList[index]
+                                                                        .discount >
+                                                                    0
+                                                                ? Flexible(
+                                                                    child: Text(
+                                                                    PriceConverter.convertPrice(
+                                                                        itemController
+                                                                            .getStartingPrice(_itemList[index])),
+                                                                    style: robotoMedium
+                                                                        .copyWith(
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeExtraSmall,
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .disabledColor,
+                                                                      decoration:
+                                                                          TextDecoration
+                                                                              .lineThrough,
+                                                                    ),
+                                                                  ))
+                                                                : SizedBox(),
+                                                          ]),
+                                                    ),
+                                                    // Icon(Icons.add, size: 20),
                                                   ]),
-                                            ),
+                                                ]),
                                           ),
                                           // Add to cart================
                                           // Container(

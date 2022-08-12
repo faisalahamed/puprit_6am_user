@@ -105,8 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: ResponsiveHelper.isDesktop(context) ? WebMenuBar() : null,
         endDrawer: MenuDrawer(),
         backgroundColor: Get.find<ThemeController>().darkTheme
-            ? Colors.black87 
-            :Colors.white,
+            ? Colors.black87
+            : Colors.white,
         //  ResponsiveHelper.isDesktop(context)
         //     ? Theme.of(context).cardColor
         //     : splashController.module == null
@@ -485,7 +485,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               // PopularStoreView(
                                               //     isPopular: false,
                                               //     isFeatured: false),
-                                              TrendingNowView(isPopular: false),
+                                              TrendingNowView(isPopular: false),//best Seller
                                               // Padding(
                                               //   padding: EdgeInsets.fromLTRB(
                                               //       10, 15, 0, 5),
