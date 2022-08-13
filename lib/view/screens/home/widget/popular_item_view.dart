@@ -90,9 +90,9 @@ class TrendingNowView extends StatelessWidget {
                                             image:
                                                 '${Get.find<SplashController>().configModel.baseUrls.itemImageUrl}'
                                                 '/${_itemList[index].image}',
-                                            height: 80,
-                                            width: 80,
-                                            fit: BoxFit.cover,
+                                            height: 110,
+                                            width: 110,
+                                            // fit: BoxFit.cover,
                                           ),
                                         ),
                                         DiscountTag(
@@ -107,6 +107,7 @@ class TrendingNowView extends StatelessWidget {
                                             ? SizedBox()
                                             : NotAvailableWidget(),
                                       ]),
+                                      SizedBox(height: 8),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: Dimensions

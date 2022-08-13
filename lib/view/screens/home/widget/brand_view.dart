@@ -22,136 +22,138 @@ class BrandView extends StatelessWidget {
       return (brandController.categoryList != null &&
               brandController.categoryList.length == 0)
           ? SizedBox()
-          : Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: TitleWidget(
-                    title: 'brand_title'.tr,
-                    // onTap: () => Get.toNamed(RouteHelper.getCategoryRoute()),
+          : Container(
+              color: Theme.of(context).backgroundColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: TitleWidget(
+                      title: 'brand_title'.tr,
+                      onTap: () => Get.toNamed(RouteHelper.getBrandRoute()),
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        // color: Colors.amberAccent,
-
-                        padding: EdgeInsets.only(top: 6, left: 4),
-                        height: 250,
-                        child: brandController.categoryList != null
-                            ? GridView.builder(
-                                // physics: NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 6.0,
-                                  mainAxisSpacing: 6.0,
-                                ),
-                                controller: _scrollController,
-                                itemCount:
-                                    brandController.categoryList.length > 15
-                                        ? 15
-                                        : brandController.categoryList.length,
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.PADDING_SIZE_SMALL),
-                                // physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    // !
-                                    // onTap: () => Get.toNamed(
-                                    //     RouteHelper.getCategoryItemRoute(
-                                    //   brandController.categoryList[index].id,
-                                    //   brandController.categoryList[index].name,
-                                    // )),
-                                    onTap: () => Get.toNamed(
-                                        RouteHelper.getBrandItemRoute(
-                                      brandController.categoryList[index].id,
-                                      brandController.categoryList[index].name,
-                                    )),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).cardColor,
+                  Container(
+                    // color: Colors.amberAccent,
+                    // padding: EdgeInsets.only(top: 6, left: 5, bottom: 10),
+                     padding: EdgeInsets.fromLTRB(4, 10, 10, 0),
+                    height: 270,
+                    child: brandController.categoryList != null
+                        ? GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 13.0,
+                              mainAxisSpacing: 12.0,
+                            ),
+                            controller: _scrollController,
+                            itemCount: 6,
+                            // brandController.categoryList.length > 15
+                            //     ? 15
+                            //     : brandController.categoryList.length,
+                            padding:
+                                EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                            // physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                // !
+                                // onTap: () => Get.toNamed(
+                                //     RouteHelper.getCategoryItemRoute(
+                                //   brandController.categoryList[index].id,
+                                //   brandController.categoryList[index].name,
+                                // )),
+                                onTap: () =>
+                                    Get.toNamed(RouteHelper.getBrandItemRoute(
+                                  brandController.categoryList[index].id,
+                                  brandController.categoryList[index].name,
+                                )),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.RADIUS_SMALL),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors
+                                              .grey[Get.isDarkMode ? 800 : 200],
+                                          spreadRadius: 1,
+                                          blurRadius: 5)
+                                    ],
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.all(0.5),
+                                    // // padding: EdgeInsets.all(0.5),
+                                    // decoration: BoxDecoration(
+                                    //   color: Theme.of(context)
+                                    //       .backgroundColor,
+                                    //   borderRadius: BorderRadius.circular(
+                                    //       Dimensions.RADIUS_SMALL),
+                                    // ),
+                                    child: Stack(children: [
+                                      ClipRRect(
                                         borderRadius: BorderRadius.circular(
                                             Dimensions.RADIUS_SMALL),
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //       color: Colors.grey[
-                                        //           Get.isDarkMode ? 800 : 200],
-                                        //       spreadRadius: 1,
-                                        //       blurRadius: 5)
-                                        // ],
+                                        child: CustomImage(
+                                          image: AppConstants.BRAND_IMAGE_URI +
+                                              '/${brandController.categoryList[index].image}',
+                                          // height: 50,
+                                          // width: 50,
+                                          // fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      child: Container(
-                                        padding: EdgeInsets.all(1),
-                                        child: Stack(children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.RADIUS_SMALL),
-                                            child: CustomImage(
-                                              image: AppConstants
-                                                      .BRAND_IMAGE_URI +
-                                                  '/${brandController.categoryList[index].image}',
-                                              // height: 50,
-                                              // width: 50,
-                                              // fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ]),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                            : CategoryShimmer(
-                                categoryController: brandController),
-                      ),
-                    ),
-                    ResponsiveHelper.isMobile(context)
-                        ? SizedBox()
-                        : brandController.categoryList != null
-                            ? Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      // showDialog(
-                                      //     context: context,
-                                      //     builder: (con) => Dialog(
-                                      //         child: Container(
-                                      //             height: 550,
-                                      //             width: 600,
-                                      //             child: CategoryPopUp(
-                                      //               categoryController:
-                                      //                   brandController,
-                                      //             ))));
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: Dimensions.PADDING_SIZE_SMALL),
-                                      child: CircleAvatar(
-                                        radius: 35,
-                                        backgroundColor:
-                                            Theme.of(context).primaryColor,
-                                        child: Text('view_all'.tr,
-                                            style: TextStyle(
-                                                fontSize: Dimensions
-                                                    .PADDING_SIZE_DEFAULT,
-                                                color: Theme.of(context)
-                                                    .cardColor)),
-                                      ),
+                                    ]),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : CategoryShimmer(categoryController: brandController),
+                  ),
+                  ResponsiveHelper.isMobile(context)
+                      ? SizedBox()
+                      : brandController.categoryList != null
+                          ? Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    // showDialog(
+                                    //     context: context,
+                                    //     builder: (con) => Dialog(
+                                    //         child: Container(
+                                    //             height: 550,
+                                    //             width: 600,
+                                    //             child: CategoryPopUp(
+                                    //               categoryController:
+                                    //                   brandController,
+                                    //             ))));
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        right: Dimensions.PADDING_SIZE_SMALL),
+                                    child: CircleAvatar(
+                                      radius: 35,
+                                      backgroundColor:
+                                          Theme.of(context).primaryColor,
+                                      child: Text('view_all'.tr,
+                                          style: TextStyle(
+                                              fontSize: Dimensions
+                                                  .PADDING_SIZE_DEFAULT,
+                                              color:
+                                                  Theme.of(context).cardColor)),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  )
-                                ],
-                              )
-                            : CategoryAllShimmer(
-                                categoryController: brandController)
-                  ],
-                ),
-              ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                )
+                              ],
+                            )
+                          : CategoryAllShimmer(
+                              categoryController: brandController),
+                ],
+              ),
             );
     });
   }

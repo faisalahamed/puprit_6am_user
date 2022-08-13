@@ -1,7 +1,9 @@
+import 'package:medibott/controller/brand_controller.dart';
 import 'package:medibott/controller/category_controller.dart';
 import 'package:medibott/controller/splash_controller.dart';
 import 'package:medibott/helper/responsive_helper.dart';
 import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/util/app_constants.dart';
 import 'package:medibott/util/dimensions.dart';
 import 'package:medibott/util/styles.dart';
 import 'package:medibott/view/base/custom_app_bar.dart';
@@ -12,19 +14,19 @@ import 'package:medibott/view/base/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryScreen extends StatefulWidget {
+class BrandAllScreen extends StatefulWidget {
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<BrandAllScreen> createState() => _BrandAllScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _BrandAllScreenState extends State<BrandAllScreen> {
   @override
   Widget build(BuildContext context) {
-    Get.find<CategoryController>().getCategoryList(false);
+    // Get.find<BrandController>().categoryList;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: CustomAppBar(title: 'categories'.tr),
+         backgroundColor: Theme.of(context).backgroundColor,
+      appBar: CustomAppBar(title: 'all_brands'.tr),
       endDrawer: MenuDrawer(),
       body: SafeArea(
           child: Scrollbar(
@@ -32,9 +34,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: FooterView(
                       child: SizedBox(
         width: Dimensions.WEB_MAX_WIDTH,
-        child: GetBuilder<CategoryController>(builder: (catController) {
-          return catController.categoryList != null
-              ? catController.categoryList.length > 0
+        child: GetBuilder<BrandController>(builder: (brandController) {
+          return brandController.categoryList != null
+              ? brandController.categoryList.length > 0
                   ? GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -49,13 +51,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         crossAxisSpacing: Dimensions.PADDING_SIZE_SMALL,
                       ),
                       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                      itemCount: catController.categoryList.length,
+                      itemCount: brandController.categoryList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () =>
                               Get.toNamed(RouteHelper.getCategoryItemRoute(
-                            catController.categoryList[index].id,
-                            catController.categoryList[index].name,
+                            brandController.categoryList[index].id,
+                            brandController.categoryList[index].name,
                           )),
                           child: Container(
                             decoration: BoxDecoration(
@@ -81,15 +83,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       height: 50,
                                       width: 50,
                                       fit: BoxFit.cover,
-                                      image:
-                                          '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${catController.categoryList[index].image}',
+                                      image: AppConstants.BRAND_IMAGE_URI +
+                                          '/${brandController.categoryList[index].image}',
                                     ),
                                   ),
                                   SizedBox(
                                       height:
                                           Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                   Text(
-                                    catController.categoryList[index].name,
+                                    brandController.categoryList[index].name,
                                     textAlign: TextAlign.center,
                                     style: robotoMedium.copyWith(
                                         fontSize: Dimensions.fontSizeSmall),

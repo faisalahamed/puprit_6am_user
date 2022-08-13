@@ -52,6 +52,7 @@
 		B956A26426CED216000728B2 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		B986B18927C8994E002FFE4C /* notification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification.wav; sourceTree = "<group>"; };
 		C84C0D6817CB2C8A28AB4670 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFB23894535CD7E6BA940184 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				6827E62B5C6E7B836316C5F0 /* Pods */,
 				120F77A6034FB94BAA4DCB53 /* Frameworks */,
+				EFB23894535CD7E6BA940184 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};

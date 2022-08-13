@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:medibott/controller/auth_controller.dart';
 import 'package:medibott/controller/cart_controller.dart';
 import 'package:medibott/controller/localization_controller.dart';
@@ -8,6 +7,7 @@ import 'package:medibott/controller/location_controller.dart';
 import 'package:medibott/controller/splash_controller.dart';
 import 'package:medibott/controller/theme_controller.dart';
 import 'package:medibott/controller/wishlist_controller.dart';
+import 'package:medibott/firebase_options.dart';
 import 'package:medibott/helper/notification_helper.dart';
 import 'package:medibott/helper/responsive_helper.dart';
 import 'package:medibott/helper/route_helper.dart';
@@ -33,7 +33,9 @@ Future<void> main() async {
   }
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Map<String, Map<String, String>> _languages = await di.init();
 
   int _orderID;

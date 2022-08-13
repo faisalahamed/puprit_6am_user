@@ -17,7 +17,7 @@ class CustomImage extends StatelessWidget {
       imageUrl: image,
       height: height,
       width: width,
-      fit: BoxFit.cover,
+      fit: BoxFit.contain,
       placeholder: (context, url) => Image.asset(Images.placeholder,
           height: height, width: width, fit: fit),
       errorWidget: (context, url, error) => Image.asset(Images.placeholder,

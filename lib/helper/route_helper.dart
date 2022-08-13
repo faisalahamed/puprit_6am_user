@@ -18,6 +18,7 @@ import 'package:medibott/view/screens/address/add_address_screen.dart';
 import 'package:medibott/view/screens/address/address_screen.dart';
 import 'package:medibott/view/screens/auth/sign_in_screen.dart';
 import 'package:medibott/view/screens/auth/sign_up_screen.dart';
+import 'package:medibott/view/screens/brand/brand_all_screen.dart';
 import 'package:medibott/view/screens/brand/brand_item_screen.dart';
 import 'package:medibott/view/screens/cart/cart_screen.dart';
 import 'package:medibott/view/screens/category/category_item_screen.dart';
@@ -96,6 +97,7 @@ class RouteHelper {
   static const String basicCampaign = '/basic-campaign';
   static const String html = '/html';
   static const String categories = '/categories';
+  static const String brands = '/brands';
   static const String categoryItem = '/category-item';
   static const String brandItem = '/brand-item';
   static const String popularItems = '/popular-items';
@@ -182,6 +184,7 @@ class RouteHelper {
 
   static String getHtmlRoute(String page) => '$html?page=$page';
   static String getCategoryRoute() => '$categories';
+  static String getBrandRoute() => '$brands';
   static String getCategoryItemRoute(int id, String name) {
     List<int> _encoded = utf8.encode(name);
     String _data = base64Encode(_encoded);
@@ -433,6 +436,7 @@ class RouteHelper {
                       : HtmlType.ABOUT_US,
             )),
     GetPage(name: categories, page: () => getRoute(CategoryScreen())),
+    GetPage(name: brands, page: () => getRoute(BrandAllScreen())),
     GetPage(
         name: categoryItem,
         page: () {

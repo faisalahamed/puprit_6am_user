@@ -25,7 +25,7 @@
     </queries>
 
     <application
-        android:label="MEDIBOTT"
+        android:label="Medibott"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
