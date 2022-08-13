@@ -1,6 +1,6 @@
-import 'package:sixam_mart/data/api/api_checker.dart';
-import 'package:sixam_mart/data/model/response/onboarding_model.dart';
-import 'package:sixam_mart/data/repository/onboarding_repo.dart';
+import 'package:medibott/data/api/api_checker.dart';
+import 'package:medibott/data/model/response/onboarding_model.dart';
+import 'package:medibott/data/repository/onboarding_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

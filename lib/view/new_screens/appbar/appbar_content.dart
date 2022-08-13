@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart/helper/route_helper.dart';
-import 'package:sixam_mart/view/new_screens/address/address_page.dart';
-import 'package:sixam_mart/view/new_screens/cart/cart.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
+import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/view/new_screens/address/address_page.dart';
+import 'package:medibott/view/new_screens/cart/cart.dart';
+import 'package:medibott/view/new_screens/colors.dart';
 
 class AppBarContent extends StatelessWidget {
   const AppBarContent({Key key}) : super(key: key);

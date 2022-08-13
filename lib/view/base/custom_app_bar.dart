@@ -1,9 +1,9 @@
-import 'package:sixam_mart/helper/responsive_helper.dart';
-import 'package:sixam_mart/helper/route_helper.dart';
-import 'package:sixam_mart/util/dimensions.dart';
-import 'package:sixam_mart/util/styles.dart';
-import 'package:sixam_mart/view/base/cart_widget.dart';
-import 'package:sixam_mart/view/base/web_menu_bar.dart';
+import 'package:medibott/helper/responsive_helper.dart';
+import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/util/dimensions.dart';
+import 'package:medibott/util/styles.dart';
+import 'package:medibott/view/base/cart_widget.dart';
+import 'package:medibott/view/base/web_menu_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,11 +56,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: () => Get.toNamed(RouteHelper.getSearchRoute()),
               ),
               IconButton(
-                      onPressed: () => Get.toNamed(RouteHelper.getCartRoute()),
-                      icon: CartWidget(
-                          color: Theme.of(context).textTheme.bodyText1.color,
-                          size: 25))
-              
+                  onPressed: () => Get.toNamed(RouteHelper.getCartRoute()),
+                  icon: CartWidget(
+                      color: Theme.of(context).textTheme.bodyText1.color,
+                      size: 25))
             ],
           );
   }

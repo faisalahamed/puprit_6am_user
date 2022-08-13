@@ -1,9 +1,9 @@
-import 'package:sixam_mart/data/api/api_checker.dart';
-import 'package:sixam_mart/data/model/response/item_model.dart';
-import 'package:sixam_mart/data/model/response/store_model.dart';
-import 'package:sixam_mart/data/repository/item_repo.dart';
-import 'package:sixam_mart/data/repository/wishlist_repo.dart';
-import 'package:sixam_mart/view/base/custom_snackbar.dart';
+import 'package:medibott/data/api/api_checker.dart';
+import 'package:medibott/data/model/response/item_model.dart';
+import 'package:medibott/data/model/response/store_model.dart';
+import 'package:medibott/data/repository/item_repo.dart';
+import 'package:medibott/data/repository/wishlist_repo.dart';
+import 'package:medibott/view/base/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,12 +23,13 @@ class WishListController extends GetxController implements GetxService {
   List<int> get wishStoreIdList => _wishStoreIdList;
 
   void addToWishList(Item product, Store store, bool isStore) async {
-    Response response = await wishListRepo.addWishList(isStore ? store.id : product.id, isStore);
+    Response response = await wishListRepo.addWishList(
+        isStore ? store.id : product.id, isStore);
     if (response.statusCode == 200) {
-      if(isStore) {
+      if (isStore) {
         _wishStoreIdList.add(store.id);
         _wishStoreList.add(store);
-      }else {
+      } else {
         _wishItemList.add(product);
         _wishItemIdList.add(product.id);
       }
@@ -43,11 +44,11 @@ class WishListController extends GetxController implements GetxService {
     Response response = await wishListRepo.removeWishList(id, isStore);
     if (response.statusCode == 200) {
       int _idIndex = -1;
-      if(isStore) {
+      if (isStore) {
         _idIndex = _wishStoreIdList.indexOf(id);
         _wishStoreIdList.removeAt(_idIndex);
         _wishStoreList.removeAt(_idIndex);
-      }else {
+      } else {
         _idIndex = _wishItemIdList.indexOf(id);
         _wishItemIdList.removeAt(_idIndex);
         _wishItemList.removeAt(_idIndex);
@@ -73,9 +74,9 @@ class WishListController extends GetxController implements GetxService {
       });
       response.body['store'].forEach((store) async {
         Store _store;
-        try{
+        try {
           _store = Store.fromJson(store);
-        }catch(e){}
+        } catch (e) {}
 
         _wishStoreList.add(_store);
         _wishStoreIdList.add(_store.id);

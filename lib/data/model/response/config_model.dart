@@ -1,4 +1,4 @@
-import 'package:sixam_mart/data/model/response/module_model.dart';
+import 'package:medibott/data/model/response/module_model.dart';
 
 class ConfigModel {
   String businessName;
@@ -44,50 +44,50 @@ class ConfigModel {
   String footerText;
   LandingPageLinks landingPageLinks;
 
-  ConfigModel(
-      {this.businessName,
-        this.logo,
-        this.address,
-        this.phone,
-        this.email,
-        this.baseUrls,
-        this.country,
-        this.defaultLocation,
-        this.currencySymbol,
-        this.currencySymbolDirection,
-        this.appMinimumVersionAndroid,
-        this.appUrlAndroid,
-        this.appMinimumVersionIos,
-        this.appUrlIos,
-        this.customerVerification,
-        this.scheduleOrder,
-        this.orderDeliveryVerification,
-        this.cashOnDelivery,
-        this.digitalPayment,
-        this.perKmShippingCharge,
-        this.minimumShippingCharge,
-        this.freeDeliveryOver,
-        this.demo,
-        this.maintenanceMode,
-        this.orderConfirmationModel,
-        this.showDmEarning,
-        this.canceledByDeliveryman,
-        this.timeformat,
-        this.language,
-        this.toggleVegNonVeg,
-        this.toggleDmRegistration,
-        this.toggleStoreRegistration,
-        this.scheduleOrderSlotDuration,
-        this.digitAfterDecimalPoint,
-        this.module,
-        this.moduleConfig,
-        this.parcelPerKmShippingCharge,
-        this.parcelMinimumShippingCharge,
-        this.landingPageSettings,
-        this.socialMedia,
-        this.footerText,
-        this.landingPageLinks,
-      });
+  ConfigModel({
+    this.businessName,
+    this.logo,
+    this.address,
+    this.phone,
+    this.email,
+    this.baseUrls,
+    this.country,
+    this.defaultLocation,
+    this.currencySymbol,
+    this.currencySymbolDirection,
+    this.appMinimumVersionAndroid,
+    this.appUrlAndroid,
+    this.appMinimumVersionIos,
+    this.appUrlIos,
+    this.customerVerification,
+    this.scheduleOrder,
+    this.orderDeliveryVerification,
+    this.cashOnDelivery,
+    this.digitalPayment,
+    this.perKmShippingCharge,
+    this.minimumShippingCharge,
+    this.freeDeliveryOver,
+    this.demo,
+    this.maintenanceMode,
+    this.orderConfirmationModel,
+    this.showDmEarning,
+    this.canceledByDeliveryman,
+    this.timeformat,
+    this.language,
+    this.toggleVegNonVeg,
+    this.toggleDmRegistration,
+    this.toggleStoreRegistration,
+    this.scheduleOrderSlotDuration,
+    this.digitAfterDecimalPoint,
+    this.module,
+    this.moduleConfig,
+    this.parcelPerKmShippingCharge,
+    this.parcelMinimumShippingCharge,
+    this.landingPageSettings,
+    this.socialMedia,
+    this.footerText,
+    this.landingPageLinks,
+  });
 
   ConfigModel.fromJson(Map<String, dynamic> json) {
     businessName = json['business_name'];
@@ -115,7 +115,9 @@ class ConfigModel {
     digitalPayment = json['digital_payment'];
     perKmShippingCharge = json['per_km_shipping_charge'].toDouble();
     minimumShippingCharge = json['minimum_shipping_charge'].toDouble();
-    freeDeliveryOver = json['free_delivery_over'] != null ? json['free_delivery_over'].toDouble() : null;
+    freeDeliveryOver = json['free_delivery_over'] != null
+        ? json['free_delivery_over'].toDouble()
+        : null;
     demo = json['demo'];
     maintenanceMode = json['maintenance_mode'];
     orderConfirmationModel = json['order_confirmation_model'];
@@ -131,7 +133,9 @@ class ConfigModel {
     toggleVegNonVeg = json['toggle_veg_non_veg'];
     toggleDmRegistration = json['toggle_dm_registration'];
     toggleStoreRegistration = json['toggle_store_registration'];
-    scheduleOrderSlotDuration = json['schedule_order_slot_duration'] == 0 ? 30 : json['schedule_order_slot_duration'];
+    scheduleOrderSlotDuration = json['schedule_order_slot_duration'] == 0
+        ? 30
+        : json['schedule_order_slot_duration'];
     digitAfterDecimalPoint = json['digit_after_decimal_point'];
     module = json['module'] != null
         ? new ModuleModel.fromJson(json['module'])
@@ -139,8 +143,10 @@ class ConfigModel {
     moduleConfig = json['module_config'] != null
         ? new ModuleConfig.fromJson(json['module_config'])
         : null;
-    parcelPerKmShippingCharge = json['parcel_per_km_shipping_charge'].toDouble();
-    parcelMinimumShippingCharge = json['parcel_minimum_shipping_charge'].toDouble();
+    parcelPerKmShippingCharge =
+        json['parcel_per_km_shipping_charge'].toDouble();
+    parcelMinimumShippingCharge =
+        json['parcel_minimum_shipping_charge'].toDouble();
     landingPageSettings = json['landing_page_settings'] != null
         ? LandingPageSettings.fromJson(json['landing_page_settings'])
         : null;
@@ -151,7 +157,9 @@ class ConfigModel {
       });
     }
     footerText = json['footer_text'];
-    landingPageLinks = json['landing_page_links'] != null ? LandingPageLinks.fromJson(json['landing_page_links']) : null;
+    landingPageLinks = json['landing_page_links'] != null
+        ? LandingPageLinks.fromJson(json['landing_page_links'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -237,25 +245,25 @@ class BaseUrls {
   String parcelCategoryImageUrl;
   String landingPageImageUrl;
 
-  BaseUrls(
-      {this.itemImageUrl,
-        this.customerImageUrl,
-        this.bannerImageUrl,
-        this.categoryImageUrl,
-        this.brandImageUrl,
-        this.reviewImageUrl,
-        this.notificationImageUrl,
-        this.vendorImageUrl,
-        this.storeImageUrl,
-        this.storeCoverPhotoUrl,
-        this.deliveryManImageUrl,
-        this.chatImageUrl,
-        this.campaignImageUrl,
-        this.moduleImageUrl,
-        this.orderAttachmentUrl,
-        this.parcelCategoryImageUrl,
-        this.landingPageImageUrl,
-      });
+  BaseUrls({
+    this.itemImageUrl,
+    this.customerImageUrl,
+    this.bannerImageUrl,
+    this.categoryImageUrl,
+    this.brandImageUrl,
+    this.reviewImageUrl,
+    this.notificationImageUrl,
+    this.vendorImageUrl,
+    this.storeImageUrl,
+    this.storeCoverPhotoUrl,
+    this.deliveryManImageUrl,
+    this.chatImageUrl,
+    this.campaignImageUrl,
+    this.moduleImageUrl,
+    this.orderAttachmentUrl,
+    this.parcelCategoryImageUrl,
+    this.landingPageImageUrl,
+  });
 
   BaseUrls.fromJson(Map<String, dynamic> json) {
     itemImageUrl = json['item_image_url'];
@@ -346,7 +354,9 @@ class ModuleConfig {
 
   ModuleConfig.fromJson(Map<String, dynamic> json) {
     moduleType = json['module_type'].cast<String>();
-    module = json[moduleType[0]] != null ? new Module.fromJson(json[moduleType[0]]) : null;
+    module = json[moduleType[0]] != null
+        ? new Module.fromJson(json[moduleType[0]])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -370,18 +380,17 @@ class Module {
   bool isParcel;
   String description;
 
-  Module(
-      {
-        this.orderPlaceToScheduleInterval,
-        this.addOn,
-        this.stock,
-        this.vegNonVeg,
-        this.unit,
-        this.orderAttachment,
-        this.showRestaurantText,
-        this.isParcel,
-        this.description,
-      });
+  Module({
+    this.orderPlaceToScheduleInterval,
+    this.addOn,
+    this.stock,
+    this.vegNonVeg,
+    this.unit,
+    this.orderAttachment,
+    this.showRestaurantText,
+    this.isParcel,
+    this.description,
+  });
 
   Module.fromJson(Map<String, dynamic> json) {
     orderPlaceToScheduleInterval = json['order_place_to_schedule_interval'];
@@ -452,12 +461,12 @@ class SocialMedia {
   String link;
   int status;
 
-  SocialMedia(
-      {this.id,
-        this.name,
-        this.link,
-        this.status,
-      });
+  SocialMedia({
+    this.id,
+    this.name,
+    this.link,
+    this.status,
+  });
 
   SocialMedia.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -482,12 +491,12 @@ class LandingPageLinks {
   String appUrlIosStatus;
   String appUrlIos;
 
-  LandingPageLinks(
-      {this.appUrlAndroidStatus,
-        this.appUrlAndroid,
-        this.appUrlIosStatus,
-        this.appUrlIos,
-      });
+  LandingPageLinks({
+    this.appUrlAndroidStatus,
+    this.appUrlAndroid,
+    this.appUrlIosStatus,
+    this.appUrlIos,
+  });
 
   LandingPageLinks.fromJson(Map<String, dynamic> json) {
     appUrlAndroidStatus = json['app_url_android_status'].toString();

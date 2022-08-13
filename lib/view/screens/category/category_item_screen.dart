@@ -1,14 +1,14 @@
-import 'package:sixam_mart/controller/category_controller.dart';
-import 'package:sixam_mart/controller/localization_controller.dart';
-import 'package:sixam_mart/data/model/response/item_model.dart';
-import 'package:sixam_mart/data/model/response/store_model.dart';
-import 'package:sixam_mart/helper/responsive_helper.dart';
-import 'package:sixam_mart/util/dimensions.dart';
-import 'package:sixam_mart/util/styles.dart';
-import 'package:sixam_mart/view/base/custom_app_bar.dart';
-import 'package:sixam_mart/view/base/item_view.dart';
-import 'package:sixam_mart/view/base/menu_drawer.dart';
-import 'package:sixam_mart/view/base/web_menu_bar.dart';
+import 'package:medibott/controller/category_controller.dart';
+import 'package:medibott/controller/localization_controller.dart';
+import 'package:medibott/data/model/response/item_model.dart';
+import 'package:medibott/data/model/response/store_model.dart';
+import 'package:medibott/helper/responsive_helper.dart';
+import 'package:medibott/util/dimensions.dart';
+import 'package:medibott/util/styles.dart';
+import 'package:medibott/view/base/custom_app_bar.dart';
+import 'package:medibott/view/base/item_view.dart';
+import 'package:medibott/view/base/menu_drawer.dart';
+import 'package:medibott/view/base/web_menu_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

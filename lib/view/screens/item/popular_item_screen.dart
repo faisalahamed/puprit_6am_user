@@ -1,11 +1,11 @@
-import 'package:sixam_mart/controller/item_controller.dart';
-import 'package:sixam_mart/util/dimensions.dart';
-import 'package:sixam_mart/view/base/custom_app_bar.dart';
-import 'package:sixam_mart/view/base/footer_view.dart';
-import 'package:sixam_mart/view/base/item_view.dart';
+import 'package:medibott/controller/item_controller.dart';
+import 'package:medibott/util/dimensions.dart';
+import 'package:medibott/view/base/custom_app_bar.dart';
+import 'package:medibott/view/base/footer_view.dart';
+import 'package:medibott/view/base/item_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart/view/base/menu_drawer.dart';
+import 'package:medibott/view/base/menu_drawer.dart';
 
 class PopularItemScreen extends StatefulWidget {
   final bool isPopular;

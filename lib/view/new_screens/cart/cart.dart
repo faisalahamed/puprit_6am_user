@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
-
+import 'package:medibott/view/new_screens/colors.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key key}) : super(key: key);

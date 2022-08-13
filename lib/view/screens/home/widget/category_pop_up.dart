@@ -1,10 +1,10 @@
-import 'package:sixam_mart/controller/category_controller.dart';
-import 'package:sixam_mart/controller/splash_controller.dart';
-import 'package:sixam_mart/helper/route_helper.dart';
-import 'package:sixam_mart/util/dimensions.dart';
-import 'package:sixam_mart/util/styles.dart';
-import 'package:sixam_mart/view/base/custom_image.dart';
-import 'package:sixam_mart/view/base/title_widget.dart';
+import 'package:medibott/controller/category_controller.dart';
+import 'package:medibott/controller/splash_controller.dart';
+import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/util/dimensions.dart';
+import 'package:medibott/util/styles.dart';
+import 'package:medibott/view/base/custom_image.dart';
+import 'package:medibott/view/base/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:get/get.dart';

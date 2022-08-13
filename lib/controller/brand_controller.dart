@@ -1,10 +1,10 @@
-import 'package:sixam_mart/data/api/api_checker.dart';
-import 'package:sixam_mart/data/model/response/brand_model.dart';
-import 'package:sixam_mart/data/model/response/category_model.dart';
-import 'package:sixam_mart/data/model/response/item_model.dart';
-import 'package:sixam_mart/data/model/response/store_model.dart';
-import 'package:sixam_mart/data/repository/brand_repo.dart';
-// import 'package:sixam_mart/data/repository/category_repo.dart';
+import 'package:medibott/data/api/api_checker.dart';
+import 'package:medibott/data/model/response/brand_model.dart';
+import 'package:medibott/data/model/response/category_model.dart';
+import 'package:medibott/data/model/response/item_model.dart';
+import 'package:medibott/data/model/response/store_model.dart';
+import 'package:medibott/data/repository/brand_repo.dart';
+// import 'package:medibott/data/repository/category_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

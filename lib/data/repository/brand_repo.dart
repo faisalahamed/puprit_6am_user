@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:sixam_mart/controller/localization_controller.dart';
-import 'package:sixam_mart/data/api/api_client.dart';
-import 'package:sixam_mart/util/app_constants.dart';
+import 'package:medibott/controller/localization_controller.dart';
+import 'package:medibott/data/api/api_client.dart';
+import 'package:medibott/util/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class BrandRepo {
@@ -26,7 +26,8 @@ class BrandRepo {
   }
 
   Future<Response> getSubCategoryList(String parentID) async {
-    return await apiClient.getData('${AppConstants.SUB_BRAND_URI}$parentID?limit=10&offset=0');
+    return await apiClient
+        .getData('${AppConstants.SUB_BRAND_URI}$parentID?limit=10&offset=0');
   }
 
   Future<Response> getCategoryItemList(

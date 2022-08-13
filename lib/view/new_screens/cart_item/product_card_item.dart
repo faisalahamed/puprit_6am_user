@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart/view/new_screens/product_details/product_details.dart';
-
+import 'package:medibott/view/new_screens/product_details/product_details.dart';
 
 class ProductCardItem extends StatelessWidget {
-
   const ProductCardItem({Key key}) : super(key: key);
 
   @override
@@ -35,16 +33,14 @@ class ProductCardItem extends StatelessWidget {
                   "Surgical Mask 3",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 5.0, horizontal: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
                 child: Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       "₹10.00",
@@ -91,4 +87,3 @@ class ProductCardItem extends StatelessWidget {
     );
   }
 }
-

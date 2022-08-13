@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
+import 'package:medibott/view/new_screens/colors.dart';
 import '../address/edit_add_address.dart';
-
 
 class RequestMedicinePage extends StatelessWidget {
   const RequestMedicinePage({Key key}) : super(key: key);
@@ -29,21 +28,27 @@ class RequestMedicinePage extends StatelessWidget {
                 print(val);
               },
             ),
-            const SizedBox(height: 8.0,),
+            const SizedBox(
+              height: 8.0,
+            ),
             AddShippingItem(
               title: 'Strength',
               onChanged: (val) {
                 print(val);
               },
             ),
-            const SizedBox(height: 8.0,),
+            const SizedBox(
+              height: 8.0,
+            ),
             AddShippingItem(
               title: 'Medicine Form',
               onChanged: (val) {
                 print(val);
               },
             ),
-            const SizedBox(height: 8.0,),
+            const SizedBox(
+              height: 8.0,
+            ),
             AddShippingItem(
               title: 'Company',
               onChanged: (val) {
@@ -67,8 +72,12 @@ class RequestMedicinePage extends StatelessWidget {
                     backgroundColor: AppColors.colorPrimary,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24.0))),
-                child: const Text('SUGGEST',
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,fontSize: 15.0),
+                child: const Text(
+                  'SUGGEST',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 15.0),
                 ),
               ),
             ),

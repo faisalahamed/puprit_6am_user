@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
+import 'package:medibott/view/new_screens/colors.dart';
 
 class MyPrescriptionPage extends StatelessWidget {
   const MyPrescriptionPage({Key key}) : super(key: key);

@@ -1,18 +1,18 @@
 import 'dart:typed_data';
 
-import 'package:sixam_mart/controller/auth_controller.dart';
-import 'package:sixam_mart/controller/cart_controller.dart';
-import 'package:sixam_mart/controller/wishlist_controller.dart';
-import 'package:sixam_mart/data/api/api_checker.dart';
-import 'package:sixam_mart/data/model/response/response_model.dart';
-import 'package:sixam_mart/data/repository/user_repo.dart';
-import 'package:sixam_mart/data/model/response/userinfo_model.dart';
+import 'package:medibott/controller/auth_controller.dart';
+import 'package:medibott/controller/cart_controller.dart';
+import 'package:medibott/controller/wishlist_controller.dart';
+import 'package:medibott/data/api/api_checker.dart';
+import 'package:medibott/data/model/response/response_model.dart';
+import 'package:medibott/data/repository/user_repo.dart';
+import 'package:medibott/data/model/response/userinfo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sixam_mart/helper/network_info.dart';
-import 'package:sixam_mart/helper/route_helper.dart';
-import 'package:sixam_mart/view/base/custom_snackbar.dart';
+import 'package:medibott/helper/network_info.dart';
+import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/view/base/custom_snackbar.dart';
 
 class UserController extends GetxController implements GetxService {
   final UserRepo userRepo;
@@ -44,11 +44,13 @@ class UserController extends GetxController implements GetxService {
     return _responseModel;
   }
 
-  Future<ResponseModel> updateUserInfo(UserInfoModel updateUserModel, String token) async {
+  Future<ResponseModel> updateUserInfo(
+      UserInfoModel updateUserModel, String token) async {
     _isLoading = true;
     update();
     ResponseModel _responseModel;
-    Response response = await userRepo.updateProfile(updateUserModel, _pickedFile, token);
+    Response response =
+        await userRepo.updateProfile(updateUserModel, _pickedFile, token);
     _isLoading = false;
     if (response.statusCode == 200) {
       _userInfoModel = updateUserModel;
@@ -83,7 +85,7 @@ class UserController extends GetxController implements GetxService {
 
   void pickImage() async {
     _pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(_pickedFile != null) {
+    if (_pickedFile != null) {
       _pickedFile = await NetworkInfo.compressImage(_pickedFile);
       _rawFile = await _pickedFile.readAsBytes();
     }
@@ -106,11 +108,9 @@ class UserController extends GetxController implements GetxService {
       Get.find<CartController>().clearCartList();
       Get.find<WishListController>().removeWishes();
       Get.offAllNamed(RouteHelper.getSignInRoute(RouteHelper.splash));
-
-    }else{
+    } else {
       Get.back();
       ApiChecker.checkApi(response);
     }
   }
-
 }

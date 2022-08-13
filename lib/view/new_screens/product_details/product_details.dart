@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart/view/new_screens/bulk_data.dart';
-import 'package:sixam_mart/view/new_screens/cart/cart.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
+import 'package:medibott/view/new_screens/bulk_data.dart';
+import 'package:medibott/view/new_screens/cart/cart.dart';
+import 'package:medibott/view/new_screens/colors.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({Key key}) : super(key: key);

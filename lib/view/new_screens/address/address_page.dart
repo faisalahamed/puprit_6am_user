@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart/view/new_screens/colors.dart';
+import 'package:medibott/view/new_screens/colors.dart';
 import 'content/custom_divider.dart';
 import 'content/custom_dotted_button.dart';
 import 'edit_add_address.dart';

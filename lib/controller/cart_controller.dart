@@ -1,10 +1,10 @@
-import 'package:sixam_mart/controller/item_controller.dart';
-import 'package:sixam_mart/controller/splash_controller.dart';
-import 'package:sixam_mart/data/model/response/cart_model.dart';
-import 'package:sixam_mart/data/repository/cart_repo.dart';
+import 'package:medibott/controller/item_controller.dart';
+import 'package:medibott/controller/splash_controller.dart';
+import 'package:medibott/data/model/response/cart_model.dart';
+import 'package:medibott/data/repository/cart_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart/view/base/custom_snackbar.dart';
+import 'package:medibott/view/base/custom_snackbar.dart';
 
 class CartController extends GetxController implements GetxService {
   final CartRepo cartRepo;
@@ -20,9 +20,9 @@ class CartController extends GetxController implements GetxService {
   }
 
   void addToCart(CartModel cartModel, int index) {
-    if(index != null && index != -1) {
-      _cartList.replaceRange(index, index+1, [cartModel]);
-    }else {
+    if (index != null && index != -1) {
+      _cartList.replaceRange(index, index + 1, [cartModel]);
+    } else {
       _cartList.add(cartModel);
     }
     Get.find<ItemController>().setExistInCart(cartModel.item, notify: true);
@@ -32,9 +32,10 @@ class CartController extends GetxController implements GetxService {
 
   void setQuantity(bool isIncrement, int cartIndex, int stock) {
     if (isIncrement) {
-      if(Get.find<SplashController>().configModel.moduleConfig.module.stock && cartList[cartIndex].quantity >= stock) {
+      if (Get.find<SplashController>().configModel.moduleConfig.module.stock &&
+          cartList[cartIndex].quantity >= stock) {
         showCustomSnackBar('out_of_stock'.tr);
-      }else {
+      } else {
         _cartList[cartIndex].quantity = _cartList[cartIndex].quantity + 1;
       }
     } else {
@@ -48,8 +49,9 @@ class CartController extends GetxController implements GetxService {
   void removeFromCart(int index) {
     _cartList.removeAt(index);
     cartRepo.addToCartList(_cartList);
-    if(Get.find<ItemController>().item != null) {
-      Get.find<ItemController>().setExistInCart(Get.find<ItemController>().item, notify: true);
+    if (Get.find<ItemController>().item != null) {
+      Get.find<ItemController>()
+          .setExistInCart(Get.find<ItemController>().item, notify: true);
     }
     update();
   }
@@ -66,13 +68,16 @@ class CartController extends GetxController implements GetxService {
     update();
   }
 
-  int isExistInCart(int itemID, String variationType, bool isUpdate, int cartIndex) {
-    for(int index=0; index<_cartList.length; index++) {
-      if(_cartList[index].item.id == itemID && (_cartList[index].variation.length > 0 ? _cartList[index].variation[0].type
-          == variationType : true)) {
-        if((isUpdate && index == cartIndex)) {
+  int isExistInCart(
+      int itemID, String variationType, bool isUpdate, int cartIndex) {
+    for (int index = 0; index < _cartList.length; index++) {
+      if (_cartList[index].item.id == itemID &&
+          (_cartList[index].variation.length > 0
+              ? _cartList[index].variation[0].type == variationType
+              : true)) {
+        if ((isUpdate && index == cartIndex)) {
           return -1;
-        }else {
+        } else {
           return index;
         }
       }
@@ -81,8 +86,8 @@ class CartController extends GetxController implements GetxService {
   }
 
   bool existAnotherStoreItem(int storeID) {
-    for(CartModel cartModel in _cartList) {
-      if(cartModel.item.storeId != storeID) {
+    for (CartModel cartModel in _cartList) {
+      if (cartModel.item.storeId != storeID) {
         return true;
       }
     }
@@ -96,6 +101,4 @@ class CartController extends GetxController implements GetxService {
     cartRepo.addToCartList(_cartList);
     update();
   }
-
-
 }
