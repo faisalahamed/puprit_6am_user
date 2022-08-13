@@ -44,8 +44,8 @@ class BrandView extends StatelessWidget {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              crossAxisSpacing: 13.0,
-                              mainAxisSpacing: 12.0,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 9.0,
                             ),
                             controller: _scrollController,
                             itemCount: 6,
