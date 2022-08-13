@@ -12,6 +12,7 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print('=========image url $image');
     return CachedNetworkImage(
       imageUrl: image,
       height: height,

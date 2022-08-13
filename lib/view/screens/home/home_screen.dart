@@ -104,9 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return Scaffold(
         appBar: ResponsiveHelper.isDesktop(context) ? WebMenuBar() : null,
         endDrawer: MenuDrawer(),
-        backgroundColor: Get.find<ThemeController>().darkTheme
-            ? Colors.black87
-            : Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         //  ResponsiveHelper.isDesktop(context)
         //     ? Theme.of(context).cardColor
         //     : splashController.module == null
@@ -189,42 +187,52 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(width: 5),
                                       ],
                                     )),
-                                title: Column(
-                                  children: [
-                                    Container(
-                                      width: 230,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          GetBuilder<LocationController>(
-                                              builder: (locationController) {
-                                            return Text(
-                                              locationController
-                                                  .getUserAddress()
-                                                  .address,
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1
-                                                      .color,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            );
-                                          }),
-                                          // Text(
-                                          //   'Birla Colony',
-                                          //   style: TextStyle(
-                                          //       fontSize: 12,
-                                          //       color: Colors.white),
-                                          // )
-                                        ],
+                                title: InkWell(
+                                  onTap: () => Get.toNamed(
+                                      RouteHelper.getAccessLocationRoute(
+                                          'home')),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 230,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GetBuilder<LocationController>(
+                                                builder: (locationController) {
+                                              return Text(
+                                                locationController
+                                                    .getUserAddress()
+                                                    .address,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1
+                                                        .color,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                              );
+                                            }),
+                                            // Text(
+                                            //   'Birla Colony',
+                                            //   style: TextStyle(
+                                            //       fontSize: 12,
+                                            //       color: Colors.white),
+                                            // )
+                                          ],
+                                        ),
                                       ),
-                                    )
-                                  ],
+                                      Icon(Icons.arrow_drop_down,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              .color),
+                                    ],
+                                  ),
                                 ),
 
                                 actions: [
@@ -485,7 +493,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               // PopularStoreView(
                                               //     isPopular: false,
                                               //     isFeatured: false),
-                                              TrendingNowView(isPopular: false),//best Seller
+                                              TrendingNowView(
+                                                  isPopular:
+                                                      false), //best Seller
                                               // Padding(
                                               //   padding: EdgeInsets.fromLTRB(
                                               //       10, 15, 0, 5),

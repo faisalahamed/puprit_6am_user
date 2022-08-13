@@ -75,13 +75,13 @@ class BrandView extends StatelessWidget {
                                         color: Theme.of(context).cardColor,
                                         borderRadius: BorderRadius.circular(
                                             Dimensions.RADIUS_SMALL),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey[
-                                                  Get.isDarkMode ? 800 : 200],
-                                              spreadRadius: 1,
-                                              blurRadius: 5)
-                                        ],
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //       color: Colors.grey[
+                                        //           Get.isDarkMode ? 800 : 200],
+                                        //       spreadRadius: 1,
+                                        //       blurRadius: 5)
+                                        // ],
                                       ),
                                       child: Container(
                                         padding: EdgeInsets.all(1),
