@@ -36,7 +36,7 @@ class BrandView extends StatelessWidget {
                   Container(
                     // color: Colors.amberAccent,
                     // padding: EdgeInsets.only(top: 6, left: 5, bottom: 10),
-                     padding: EdgeInsets.fromLTRB(4, 10, 10, 0),
+                    padding: EdgeInsets.fromLTRB(4, 10, 10, 0),
                     height: 270,
                     child: brandController.categoryList != null
                         ? GridView.builder(
