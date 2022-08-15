@@ -8,12 +8,13 @@ import 'package:medibott/data/model/response/item_model.dart';
 import 'package:medibott/data/model/response/store_model.dart';
 import 'package:medibott/helper/responsive_helper.dart';
 import 'package:medibott/helper/route_helper.dart';
+import 'package:medibott/util/app_constants.dart';
 import 'package:medibott/util/dimensions.dart';
 import 'package:medibott/util/styles.dart';
 import 'package:medibott/view/base/cart_widget.dart';
+import 'package:medibott/view/base/custom_image.dart';
 import 'package:medibott/view/base/item_view.dart';
 import 'package:medibott/view/base/menu_drawer.dart';
-import 'package:medibott/view/base/veg_filter_widget.dart';
 import 'package:medibott/view/base/web_menu_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,11 @@ import 'package:get/get.dart';
 class BrandItemScreen extends StatefulWidget {
   final String categoryID;
   final String categoryName;
-  BrandItemScreen({@required this.categoryID, @required this.categoryName});
+  final String brandImage;
+  BrandItemScreen(
+      {@required this.categoryID,
+      @required this.categoryName,
+      @required this.brandImage});
 
   @override
   _BrandItemScreenState createState() => _BrandItemScreenState();
@@ -206,9 +211,16 @@ class _BrandItemScreenState extends State<BrandItemScreen>
                           ),
                           // color: Theme.of(context).cardColor,
                           margin: EdgeInsets.only(left: 20),
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                          child: Icon(Icons.image),
+                          // padding: EdgeInsets.symmetric(
+                          //     vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          // child: Icon(Icons.image),
+                          child: CustomImage(
+                            image: AppConstants.BRAND_IMAGE_URI +
+                                '/${widget.brandImage}',
+                            // height: 50,
+                            // width: 50,
+                            // fit: BoxFit.cover,
+                          ),
                           // !All sub list
                           // child: ListView.builder(
                           //   scrollDirection: Axis.horizontal,
@@ -297,7 +309,7 @@ class _BrandItemScreenState extends State<BrandItemScreen>
                       : SizedBox(),
                   // Center(
                   //     child: Container(
-                    
+
                   //   width: Dimensions.WEB_MAX_WIDTH,
                   //   color: Theme.of(context).cardColor,
                   //   child: TabBar(

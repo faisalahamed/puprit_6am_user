@@ -68,6 +68,7 @@ class BrandView extends StatelessWidget {
                                     Get.toNamed(RouteHelper.getBrandItemRoute(
                                   brandController.categoryList[index].id,
                                   brandController.categoryList[index].name,
+                                  brandController.categoryList[index].image,
                                 )),
                                 child: Container(
                                   decoration: BoxDecoration(

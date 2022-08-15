@@ -25,7 +25,7 @@ class _BrandAllScreenState extends State<BrandAllScreen> {
     // Get.find<BrandController>().categoryList;
 
     return Scaffold(
-         backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: CustomAppBar(title: 'all_brands'.tr),
       endDrawer: MenuDrawer(),
       body: SafeArea(
@@ -54,11 +54,11 @@ class _BrandAllScreenState extends State<BrandAllScreen> {
                       itemCount: brandController.categoryList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () =>
-                              Get.toNamed(RouteHelper.getCategoryItemRoute(
-                            brandController.categoryList[index].id,
-                            brandController.categoryList[index].name,
-                          )),
+                          onTap: () => Get.toNamed(
+                              RouteHelper.getBrandItemRoute(
+                                  brandController.categoryList[index].id,
+                                  brandController.categoryList[index].name,
+                                  brandController.categoryList[index].image)),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,

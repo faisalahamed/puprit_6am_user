@@ -191,10 +191,12 @@ class RouteHelper {
     return '$categoryItem?id=$id&name=$_data';
   }
 
-  static String getBrandItemRoute(int id, String name) {
+  static String getBrandItemRoute(int id, String name, String brandImage) {
     List<int> _encoded = utf8.encode(name);
     String _data = base64Encode(_encoded);
-    return '$brandItem?id=$id&name=$_data';
+    List<int> _encodedImage = utf8.encode(brandImage);
+    String _dataImage = base64Encode(_encodedImage);
+    return '$brandItem?id=$id&name=$_data&image=$_dataImage';
   }
 
   static String getPopularItemRoute(bool isPopular) =>
@@ -452,8 +454,16 @@ class RouteHelper {
           List<int> _decode =
               base64Decode(Get.parameters['name'].replaceAll(' ', '+'));
           String _data = utf8.decode(_decode);
+          List<int> _decodeImage =
+              base64Decode(Get.parameters['image'].replaceAll(' ', '+'));
+          String _dataImage = utf8.decode(_decodeImage);
+          print('============================' + _dataImage);
+
           return getRoute(BrandItemScreen(
-              categoryID: Get.parameters['id'], categoryName: _data));
+            categoryID: Get.parameters['id'],
+            categoryName: _data,
+            brandImage: _dataImage,
+          ));
         }),
     GetPage(
         name: popularItems,

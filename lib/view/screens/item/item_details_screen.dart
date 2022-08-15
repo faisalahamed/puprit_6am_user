@@ -155,7 +155,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     )
                   : Column(children: [
                       Expanded(
-                          child: Scrollbar(
+                        // child: Scrollbar(
                         child: SingleChildScrollView(
                             padding:
                                 EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -454,7 +454,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             : SizedBox(),
                                       ],
                                     )))),
-                      )),
+                      ),
+                      // ),
                       Container(
                         width: 1170,
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),

@@ -45,25 +45,26 @@ class ItemTitleView extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                InkWell(
-                  onTap: () {
-                    if (inStorePage) {
-                      Get.back();
-                    } else {
-                      Get.offNamed(
-                          RouteHelper.getStoreRoute(item.storeId, 'item'));
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 5, 5, 5),
-                    child: Text(
-                      item.storeName,
-                      style: robotoRegular.copyWith(
-                          fontSize: Dimensions.fontSizeSmall),
-                    ),
-                  ),
-                ),
+                // const SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                // InkWell(
+                //   onTap: () {
+                //     if (inStorePage) {
+                //       Get.back();
+                //     } else {
+                //       Get.offNamed(
+                //           RouteHelper.getStoreRoute(item.storeId, 'item'));
+                //     }
+                //   },
+                //   child: Padding(
+                //     padding: EdgeInsets.fromLTRB(0, 5, 5, 5),
+                //     child: Text(
+                //       item.storeName,
+                //       style: robotoRegular.copyWith(
+                //           fontSize: Dimensions.fontSizeSmall),
+                //     ),
+                //   ),
+                // ),
+
                 const SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                 RatingBar(
                     rating: item.avgRating,
@@ -154,24 +155,24 @@ class ItemTitleView extends StatelessWidget {
                         }),
                       ]),
                       SizedBox(height: 5),
-                      InkWell(
-                        onTap: () {
-                          if (inStorePage) {
-                            Get.back();
-                          } else {
-                            Get.offNamed(RouteHelper.getStoreRoute(
-                                item.storeId, 'item'));
-                          }
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 5, 5, 5),
-                          child: Text(
-                            item.storeName,
-                            style: robotoRegular.copyWith(
-                                fontSize: Dimensions.fontSizeSmall),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     if (inStorePage) {
+                      //       Get.back();
+                      //     } else {
+                      //       Get.offNamed(RouteHelper.getStoreRoute(
+                      //           item.storeId, 'item'));
+                      //     }
+                      //   },
+                      //   child: Padding(
+                      //     padding: EdgeInsets.fromLTRB(0, 5, 5, 5),
+                      //     child: Text(
+                      //       item.storeName,
+                      //       style: robotoRegular.copyWith(
+                      //           fontSize: Dimensions.fontSizeSmall),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(
                           height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                       Text(
