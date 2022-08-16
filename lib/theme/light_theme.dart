@@ -17,5 +17,6 @@ ThemeData light({Color color = const Color(0xFF4a9410)}) => ThemeData(
       textTheme: TextTheme(
         bodyText1: TextStyle(color: Colors.white),
         bodyText2: TextStyle(color: Colors.black),
+        // subtitle1: TextStyle(color: Colors.black),
       ),
     );

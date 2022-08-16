@@ -71,27 +71,27 @@ class ItemTitleView extends StatelessWidget {
                     ratingCount: item.ratingCount,
                     size: 21),
                 const SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                Row(children: [
-                  Text(
-                    '${PriceConverter.convertPrice(_startingPrice, discount: item.discount, discountType: item.discountType)}'
-                    '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice, discount: item.discount, discountType: item.discountType)}' : ''}',
-                    style: robotoBold.copyWith(
-                        color: Theme.of(context).primaryColor, fontSize: 30),
-                  ),
-                  const SizedBox(width: 10),
-                  item.discount > 0
-                      ? Flexible(
-                          child: Text(
-                            '${PriceConverter.convertPrice(_startingPrice)}'
-                            '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice)}' : ''}',
-                            style: robotoRegular.copyWith(
-                                color: Colors.red,
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: Dimensions.fontSizeLarge),
-                          ),
-                        )
-                      : SizedBox(),
-                ]),
+                // Row(children: [
+                //   Text(
+                //     '${PriceConverter.convertPrice(_startingPrice, discount: item.discount, discountType: item.discountType)}'
+                //     '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice, discount: item.discount, discountType: item.discountType)}' : ''}',
+                //     style: robotoBold.copyWith(
+                //         color: Theme.of(context).primaryColor, fontSize: 30),
+                //   ),
+                //   const SizedBox(width: 10),
+                //   item.discount > 0
+                //       ? Flexible(
+                //           child: Text(
+                //             '${PriceConverter.convertPrice(_startingPrice)}'
+                //             '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice)}' : ''}',
+                //             style: robotoRegular.copyWith(
+                //                 color: Colors.red,
+                //                 decoration: TextDecoration.lineThrough,
+                //                 fontSize: Dimensions.fontSizeLarge),
+                //           ),
+                //         )
+                //       : SizedBox(),
+                // ]),
               ],
             );
           })
@@ -105,13 +105,14 @@ class ItemTitleView extends StatelessWidget {
                     children: [
                       Row(children: [
                         Expanded(
-                            child: Text(
-                          item.name ?? '',
-                          style: robotoMedium.copyWith(
-                              fontSize: Dimensions.fontSizeExtraLarge),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        )),
+                          child: Text(
+                            item.name ?? '',
+                            style: robotoMedium.copyWith(
+                                fontSize: Dimensions.fontSizeExtraLarge),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                         GetBuilder<WishListController>(
                             builder: (wishController) {
                           return Row(
@@ -173,26 +174,26 @@ class ItemTitleView extends StatelessWidget {
                       //     ),
                       //   ),
                       // ),
-                      const SizedBox(
-                          height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                      Text(
-                        '${PriceConverter.convertPrice(_startingPrice, discount: item.discount, discountType: item.discountType)}'
-                        '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice, discount: item.discount, discountType: item.discountType)}' : ''}',
-                        style: robotoMedium.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: Dimensions.fontSizeLarge),
-                      ),
-                      SizedBox(height: 5),
-                      item.discount > 0
-                          ? Text(
-                              '${PriceConverter.convertPrice(_startingPrice)}'
-                              '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice)}' : ''}',
-                              style: robotoRegular.copyWith(
-                                  color: Theme.of(context).hintColor,
-                                  decoration: TextDecoration.lineThrough),
-                            )
-                          : SizedBox(),
-                      SizedBox(height: item.discount > 0 ? 5 : 0),
+                      // const SizedBox(
+                      //     height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                      // Text(
+                      //   '${PriceConverter.convertPrice(_startingPrice, discount: item.discount, discountType: item.discountType)}'
+                      //   '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice, discount: item.discount, discountType: item.discountType)}' : ''}',
+                      //   style: robotoMedium.copyWith(
+                      //       color: Theme.of(context).primaryColor,
+                      //       fontSize: Dimensions.fontSizeLarge),
+                      // ),
+                      // SizedBox(height: 5),
+                      // item.discount > 0
+                      //     ? Text(
+                      //         '${PriceConverter.convertPrice(_startingPrice)}'
+                      //         '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(_endingPrice)}' : ''}',
+                      //         style: robotoRegular.copyWith(
+                      //             color: Theme.of(context).hintColor,
+                      //             decoration: TextDecoration.lineThrough),
+                      //       )
+                      //     : SizedBox(),
+                      // SizedBox(height: item.discount > 0 ? 5 : 0),
                       Row(children: [
                         Text(item.avgRating.toStringAsFixed(1),
                             style: robotoRegular.copyWith(
