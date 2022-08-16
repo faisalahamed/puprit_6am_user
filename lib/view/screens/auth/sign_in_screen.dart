@@ -6,6 +6,7 @@ import 'package:country_code_picker/country_code.dart';
 import 'package:medibott/controller/auth_controller.dart';
 import 'package:medibott/controller/localization_controller.dart';
 import 'package:medibott/controller/splash_controller.dart';
+import 'package:medibott/controller/theme_controller.dart';
 import 'package:medibott/helper/responsive_helper.dart';
 import 'package:medibott/helper/route_helper.dart';
 import 'package:medibott/util/dimensions.dart';
@@ -146,7 +147,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(Dimensions.RADIUS_SMALL),
-                          color: Theme.of(context).cardColor,
+                          // color: Theme.of(context).cardColor,
+
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.grey[Get.isDarkMode ? 800 : 200],
@@ -155,67 +157,104 @@ class _SignInScreenState extends State<SignInScreen> {
                           ],
                         ),
                         child: Column(children: [
-                          Row(children: [
-                            CodePickerWidget(
-                              onChanged: (CountryCode countryCode) {
-                                _countryDialCode = countryCode.dialCode;
-                              },
-                              initialSelection: _countryDialCode != null
-                                  ? CountryCode.fromCountryCode(
+                          Container(
+                            margin: EdgeInsets.only(bottom: 8),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(
+                                  Dimensions.RADIUS_SMALL),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[
+                                      Get.find<ThemeController>().darkTheme
+                                          ? 700
+                                          : 300],
+                                  blurRadius: 5,
+                                  spreadRadius: 1,
+                                )
+                              ],
+                            ),
+                            child: Row(children: [
+                              CodePickerWidget(
+                                onChanged: (CountryCode countryCode) {
+                                  _countryDialCode = countryCode.dialCode;
+                                },
+                                initialSelection: _countryDialCode != null
+                                    ? CountryCode.fromCountryCode(
+                                            Get.find<SplashController>()
+                                                .configModel
+                                                .country)
+                                        .code
+                                    : Get.find<LocalizationController>()
+                                        .locale
+                                        .countryCode,
+                                favorite: [
+                                  CountryCode.fromCountryCode(
                                           Get.find<SplashController>()
                                               .configModel
                                               .country)
                                       .code
-                                  : Get.find<LocalizationController>()
-                                      .locale
-                                      .countryCode,
-                              favorite: [
-                                CountryCode.fromCountryCode(
-                                        Get.find<SplashController>()
-                                            .configModel
-                                            .country)
-                                    .code
-                              ],
-                              showDropDownButton: true,
-                              padding: EdgeInsets.zero,
-                              showFlagMain: true,
-                              flagWidth: 30,
-                              dialogBackgroundColor:
-                                  Theme.of(context).cardColor,
-                              textStyle: robotoRegular.copyWith(
-                                fontSize: Dimensions.fontSizeLarge,
-                                color:
-                                    Theme.of(context).textTheme.bodyText2.color,
+                                ],
+                                showDropDownButton: true,
+                                padding: EdgeInsets.zero,
+                                showFlagMain: true,
+                                flagWidth: 30,
+                                dialogBackgroundColor:
+                                    Theme.of(context).cardColor,
+                                textStyle: robotoRegular.copyWith(
+                                  fontSize: Dimensions.fontSizeLarge,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2
+                                      .color,
+                                ),
                               ),
-                            ),
-                            //  Container(color: Colors.redAccent,child: Text('12'),) ,
-                            Expanded(
-                                flex: 1,
-                                child: CustomTextField(
-                                  hintText: 'phone'.tr,
-                                  controller: _phoneController,
-                                  focusNode: _phoneFocus,
-                                  nextFocus: _passwordFocus,
-                                  inputType: TextInputType.phone,
-                                  divider: false,
-                                )),
-                          ]),
+                              //  Container(color: Colors.redAccent,child: Text('12'),) ,
+                              Expanded(
+                                  flex: 1,
+                                  child: CustomTextField(
+                                    hintText: 'phone'.tr,
+                                    controller: _phoneController,
+                                    focusNode: _phoneFocus,
+                                    nextFocus: _passwordFocus,
+                                    inputType: TextInputType.phone,
+                                    divider: false,
+                                  )),
+                            ]),
+                          ),
                           Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: Dimensions.PADDING_SIZE_LARGE),
                               child: Divider(height: 1)),
-                          CustomTextField(
-                            hintText: 'password'.tr,
-                            controller: _passwordController,
-                            focusNode: _passwordFocus,
-                            inputAction: TextInputAction.done,
-                            inputType: TextInputType.visiblePassword,
-                            prefixIcon: Images.lock,
-                            isPassword: true,
-                            onSubmit: (text) => (GetPlatform.isWeb &&
-                                    authController.acceptTerms)
-                                ? _login(authController, _countryDialCode)
-                                : null,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(
+                                  Dimensions.RADIUS_SMALL),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[
+                                      Get.find<ThemeController>().darkTheme
+                                          ? 700
+                                          : 300],
+                                  blurRadius: 5,
+                                  spreadRadius: 1,
+                                )
+                              ],
+                            ),
+                            child: CustomTextField(
+                              hintText: 'password'.tr,
+                              controller: _passwordController,
+                              focusNode: _passwordFocus,
+                              inputAction: TextInputAction.done,
+                              inputType: TextInputType.visiblePassword,
+                              prefixIcon: Images.lock,
+                              isPassword: true,
+                              onSubmit: (text) => (GetPlatform.isWeb &&
+                                      authController.acceptTerms)
+                                  ? _login(authController, _countryDialCode)
+                                  : null,
+                            ),
                           ),
                         ]),
                       ),

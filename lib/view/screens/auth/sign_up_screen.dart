@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:country_code_picker/country_code.dart';
 import 'package:medibott/controller/auth_controller.dart';
 import 'package:medibott/controller/splash_controller.dart';
+import 'package:medibott/controller/theme_controller.dart';
 import 'package:medibott/data/model/body/signup_body.dart';
 import 'package:medibott/helper/responsive_helper.dart';
 import 'package:medibott/helper/route_helper.dart';
@@ -111,98 +112,211 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       child: Column(children: [
-                        CustomTextField(
-                          hintText: 'first_name'.tr,
-                          controller: _firstNameController,
-                          focusNode: _firstNameFocus,
-                          nextFocus: _lastNameFocus,
-                          inputType: TextInputType.name,
-                          capitalization: TextCapitalization.words,
-                          prefixIcon: Images.user,
-                          divider: true,
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: CustomTextField(
+                            hintText: 'first_name'.tr,
+                            controller: _firstNameController,
+                            focusNode: _firstNameFocus,
+                            nextFocus: _lastNameFocus,
+                            inputType: TextInputType.name,
+                            capitalization: TextCapitalization.words,
+                            prefixIcon: Images.user,
+                            
+                            // divider: true,
+                          ),
                         ),
-                        CustomTextField(
-                          hintText: 'last_name'.tr,
-                          controller: _lastNameController,
-                          focusNode: _lastNameFocus,
-                          nextFocus: _emailFocus,
-                          inputType: TextInputType.name,
-                          capitalization: TextCapitalization.words,
-                          prefixIcon: Images.user,
-                          divider: true,
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: CustomTextField(
+                            hintText: 'last_name'.tr,
+                            controller: _lastNameController,
+                            focusNode: _lastNameFocus,
+                            nextFocus: _emailFocus,
+                            inputType: TextInputType.name,
+                            capitalization: TextCapitalization.words,
+                            prefixIcon: Images.user,
+                            // divider: true,
+                          ),
                         ),
-                        CustomTextField(
-                          hintText: 'email'.tr,
-                          controller: _emailController,
-                          focusNode: _emailFocus,
-                          nextFocus: _phoneFocus,
-                          inputType: TextInputType.emailAddress,
-                          prefixIcon: Images.mail,
-                          divider: true,
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: CustomTextField(
+                            hintText: 'email'.tr,
+                            controller: _emailController,
+                            focusNode: _emailFocus,
+                            nextFocus: _phoneFocus,
+                            inputType: TextInputType.emailAddress,
+                            prefixIcon: Images.mail,
+                            // divider: true,
+                          ),
                         ),
-                        Row(children: [
-                          CodePickerWidget(
-                            onChanged: (CountryCode countryCode) {
-                              _countryDialCode = countryCode.dialCode;
-                            },
-                            initialSelection: CountryCode.fromCountryCode(
-                                    Get.find<SplashController>()
-                                        .configModel
-                                        .country)
-                                .code,
-                            favorite: [
-                              CountryCode.fromCountryCode(
+                        // Phone Input
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: Row(children: [
+                            CodePickerWidget(
+                              onChanged: (CountryCode countryCode) {
+                                _countryDialCode = countryCode.dialCode;
+                              },
+                              initialSelection: CountryCode.fromCountryCode(
                                       Get.find<SplashController>()
                                           .configModel
                                           .country)
-                                  .code
-                            ],
-                            showDropDownButton: true,
-                            padding: EdgeInsets.zero,
-                            showFlagMain: true,
-                            dialogBackgroundColor: Theme.of(context).cardColor,
-                            textStyle: robotoRegular.copyWith(
-                              fontSize: Dimensions.fontSizeLarge,
-                              color:
-                                  Theme.of(context).textTheme.bodyText1.color,
+                                  .code,
+                              favorite: [
+                                CountryCode.fromCountryCode(
+                                        Get.find<SplashController>()
+                                            .configModel
+                                            .country)
+                                    .code
+                              ],
+                              showDropDownButton: true,
+                              padding: EdgeInsets.zero,
+                              showFlagMain: true,
+                              dialogBackgroundColor:
+                                  Theme.of(context).cardColor,
+                              textStyle: robotoRegular.copyWith(
+                                fontSize: Dimensions.fontSizeLarge,
+                                color:
+                                    Theme.of(context).textTheme.bodyText2.color,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                              child: CustomTextField(
-                            hintText: 'phone'.tr,
-                            controller: _phoneController,
-                            focusNode: _phoneFocus,
-                            nextFocus: _passwordFocus,
-                            inputType: TextInputType.phone,
-                            divider: false,
-                          )),
-                        ]),
-                        Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.PADDING_SIZE_LARGE),
-                            child: Divider(height: 1)),
-                        CustomTextField(
-                          hintText: 'password'.tr,
-                          controller: _passwordController,
-                          focusNode: _passwordFocus,
-                          nextFocus: _confirmPasswordFocus,
-                          inputType: TextInputType.visiblePassword,
-                          prefixIcon: Images.lock,
-                          isPassword: true,
-                          divider: true,
+                            Expanded(
+                                child: CustomTextField(
+                              hintText: 'phone'.tr,
+                              controller: _phoneController,
+                              focusNode: _phoneFocus,
+                              nextFocus: _passwordFocus,
+                              inputType: TextInputType.phone,
+                              divider: false,
+                            )),
+                          ]),
                         ),
-                        CustomTextField(
-                          hintText: 'confirm_password'.tr,
-                          controller: _confirmPasswordController,
-                          focusNode: _confirmPasswordFocus,
-                          inputAction: TextInputAction.done,
-                          inputType: TextInputType.visiblePassword,
-                          prefixIcon: Images.lock,
-                          isPassword: true,
-                          onSubmit: (text) =>
-                              (GetPlatform.isWeb && authController.acceptTerms)
-                                  ? _register(authController, _countryDialCode)
-                                  : null,
+
+                        // Padding(
+                        //     padding: EdgeInsets.symmetric(
+                        //         horizontal: Dimensions.PADDING_SIZE_LARGE),
+                        //     child: Divider(height: 1)),
+
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: CustomTextField(
+                            hintText: 'password'.tr,
+                            controller: _passwordController,
+                            focusNode: _passwordFocus,
+                            nextFocus: _confirmPasswordFocus,
+                            inputType: TextInputType.visiblePassword,
+                            prefixIcon: Images.lock,
+                            isPassword: true,
+                            // divider: true,
+                          ),
+                        ),
+                        Container(
+                          // margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[
+                                    Get.find<ThemeController>().darkTheme
+                                        ? 700
+                                        : 300],
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                              )
+                            ],
+                          ),
+                          child: CustomTextField(
+                            hintText: 'confirm_password'.tr,
+                            controller: _confirmPasswordController,
+                            focusNode: _confirmPasswordFocus,
+                            inputAction: TextInputAction.done,
+                            inputType: TextInputType.visiblePassword,
+                            prefixIcon: Images.lock,
+                            isPassword: true,
+                            onSubmit: (text) => (GetPlatform.isWeb &&
+                                    authController.acceptTerms)
+                                ? _register(authController, _countryDialCode)
+                                : null,
+                          ),
                         ),
                       ]),
                     ),
