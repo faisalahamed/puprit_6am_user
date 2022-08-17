@@ -176,13 +176,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         CircleAvatar(
                                           // ${Get.find<SplashController>().configModel.baseUrls.customerImageUrl}
-                                          child: Icon(Icons.person,
-                                              color: Theme.of(context)
-                                                  .primaryColor),
-                                          backgroundColor: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              .color,
+                                          backgroundImage: NetworkImage(
+                                              '${Get.find<SplashController>().configModel.baseUrls.customerImageUrl}'
+                                              '/${(Get.find<UserController>().userInfoModel != null && Get.find<AuthController>().isLoggedIn()) ? Get.find<UserController>().userInfoModel.image : ''}',
+                                              scale: 0.5),
+                                          onBackgroundImageError: (ob, st) {
+                                            return Icon(Icons.person);
+                                          },
+                                          backgroundColor: Colors.white,
                                         ),
                                         SizedBox(width: 5),
                                       ],
@@ -489,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               TrendingNowView(
                                                   isPopular:
                                                       true), //trending now
-                                              BrandView(),
+                                              BrandView(), //brand
                                               // PopularStoreView(
                                               //     isPopular: false,
                                               //     isFeatured: false),

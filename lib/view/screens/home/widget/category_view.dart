@@ -44,11 +44,14 @@ class CategoryView extends StatelessWidget {
                             mainAxisSpacing: 12.0,
                           ),
                           controller: _scrollController,
-                          itemCount: 6,
+                          itemCount: categoryController.categoryList.length >= 6
+                              ? 6
+                              : categoryController.categoryList.length,
                           // categoryController.categoryList.length > 15
                           //     ? 15
                           //     : categoryController.categoryList.length,
-                          padding: EdgeInsets.only(left:Dimensions.PADDING_SIZE_SMALL,
+                          padding: EdgeInsets.only(
+                              left: Dimensions.PADDING_SIZE_SMALL,
                               top: Dimensions.PADDING_SIZE_SMALL,
                               bottom: Dimensions.PADDING_SIZE_SMALL),
                           // physics: BouncingScrollPhysics(),
@@ -160,13 +163,19 @@ class CategoryShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 75,
-      child: ListView.builder(
-        itemCount: 14,
-        padding: EdgeInsets.only(left: Dimensions.PADDING_SIZE_SMALL),
-        physics: BouncingScrollPhysics(),
-        shrinkWrap: true,
+    return Container(
+      // padding: EdgeInsets.only(right: 100),
+      height: 270,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 13.0,
+          mainAxisSpacing: 12.0,
+        ),
+        itemCount: 6,
+        // padding: EdgeInsets.only(left: Dimensions.PADDING_SIZE_SMALL),
+        physics: NeverScrollableScrollPhysics(),
+        // shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
@@ -176,16 +185,15 @@ class CategoryShimmer extends StatelessWidget {
               enabled: categoryController.categoryList == null,
               child: Column(children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 110,
+                  // width: 50,
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius:
                         BorderRadius.circular(Dimensions.RADIUS_SMALL),
                   ),
                 ),
-                SizedBox(height: 5),
-                Container(height: 10, width: 50, color: Colors.grey[300]),
+                // SizedBox(height: 5),
               ]),
             ),
           );
@@ -202,7 +210,7 @@ class CategoryAllShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 75,
+      height: 270,
       child: Padding(
         padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_SMALL),
         child: Shimmer(
@@ -213,12 +221,12 @@ class CategoryAllShimmer extends StatelessWidget {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                // color: Colors.grey[800],
                 borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
               ),
             ),
             SizedBox(height: 5),
-            Container(height: 10, width: 50, color: Colors.grey[300]),
+            Container(height: 10, width: 50, color: Colors.grey[400]),
           ]),
         ),
       ),
